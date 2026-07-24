@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Directory — TeamDesk</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <button class="hamburger" id="hamburgerBtn" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <a href="index.html" class="brand">
+      <span class="brand-mark">TD</span>
+      <span class="brand-name">TeamDesk</span>
+    </a>
+    <div class="header-right">
+      <span class="header-date" id="headerDate"></span>
+      <div class="avatar">TK</div>
+    </div>
+  </header>
+
+  <div class="shell">
+    <aside class="sidebar" id="sidebar">
+      <nav class="side-nav">
+        <a href="index.html" class="side-link" data-icon="grid">Dashboard</a>
+        <a href="requests.html" class="side-link" data-icon="doc">My Requests</a>
+        <a href="documents.html" class="side-link" data-icon="folder">Documents</a>
+        <a href="directory.html" class="side-link active" data-icon="people">Directory</a>
+        <a href="settings.html" class="side-link" data-icon="gear">Settings</a>
+      </nav>
+      <div class="side-footer">
+        <p>Need help?</p>
+        <a href="mailto:it-support@teamdesk.example" class="side-help-link">Contact IT Support →</a>
+      </div>
+    </aside>
+    <div class="backdrop" id="backdrop"></div>
+
+    <main class="main">
+      <div class="page-heading">
+        <h1>Directory</h1>
+      </div>
+
+      <div class="page-card">
+        <input type="search" class="search-input" id="directorySearch" placeholder="Search by name or department…" />
+        <div class="search-meta-row">
+          <span class="search-results-count" id="dirResultsCount">5 people</span>
+        </div>
+      </div>
+
+      <div class="directory-list" id="directoryList">
+        <div class="directory-row" data-name="riya sharma hr operations">
+          <div class="directory-avatar is-photo"><img src="https://i.pravatar.cc/88?img=47" alt="Riya Sharma" loading="lazy"></div>
+          <div class="directory-info">
+            <h4>Riya Sharma</h4>
+            <p>HR Operations · Pune</p>
+          </div>
+          <button class="dir-message-btn">Message</button>
+        </div>
+        <div class="directory-row" data-name="arjun kulkarni engineering">
+          <div class="directory-avatar is-photo"><img src="https://i.pravatar.cc/88?img=12" alt="Arjun Kulkarni" loading="lazy"></div>
+          <div class="directory-info">
+            <h4>Arjun Kulkarni</h4>
+            <p>Engineering · Pune</p>
+          </div>
+          <button class="dir-message-btn">Message</button>
+        </div>
+        <div class="directory-row" data-name="meera patil people ops">
+          <div class="directory-avatar" style="background:linear-gradient(135deg,#C97104,#E8A23A)">MP</div>
+          <div class="directory-info">
+            <h4>Meera Patil</h4>
+            <p>People Ops · Bengaluru</p>
+          </div>
+          <button class="dir-message-btn">Message</button>
+        </div>
+        <div class="directory-row" data-name="devika rao finance">
+          <div class="directory-avatar" style="background:linear-gradient(135deg,#C2417A,#E667A0)">DR</div>
+          <div class="directory-info">
+            <h4>Devika Rao</h4>
+            <p>Finance · Mumbai</p>
+          </div>
+          <button class="dir-message-btn">Message</button>
+        </div>
+        <div class="directory-row" data-name="sameer joshi it support">
+          <div class="directory-avatar" style="background:linear-gradient(135deg,#3730A3,#0F9B8E)">SJ</div>
+          <div class="directory-info">
+            <h4>Sameer Joshi</h4>
+            <p>IT Support · Pune</p>
+          </div>
+          <button class="dir-message-btn">Message</button>
+        </div>
+      </div>
+      <p class="empty-state" id="directoryEmptyState" hidden>No one matches that search.</p>
+    </main>
+  </div>
+
+  <div class="chat-dock" id="chatDock"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>

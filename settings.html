@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Settings — TeamDesk</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <button class="hamburger" id="hamburgerBtn" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <a href="index.html" class="brand">
+      <span class="brand-mark">TD</span>
+      <span class="brand-name">TeamDesk</span>
+    </a>
+    <div class="header-right">
+      <span class="header-date" id="headerDate"></span>
+      <div class="avatar">TK</div>
+    </div>
+  </header>
+
+  <div class="shell">
+    <aside class="sidebar" id="sidebar">
+      <nav class="side-nav">
+        <a href="index.html" class="side-link" data-icon="grid">Dashboard</a>
+        <a href="requests.html" class="side-link" data-icon="doc">My Requests</a>
+        <a href="documents.html" class="side-link" data-icon="folder">Documents</a>
+        <a href="directory.html" class="side-link" data-icon="people">Directory</a>
+        <a href="settings.html" class="side-link active" data-icon="gear">Settings</a>
+      </nav>
+      <div class="side-footer">
+        <p>Need help?</p>
+        <a href="mailto:it-support@teamdesk.example" class="side-help-link">Contact IT Support →</a>
+      </div>
+    </aside>
+    <div class="backdrop" id="backdrop"></div>
+
+    <main class="main">
+      <div class="page-heading">
+        <h1>Settings</h1>
+      </div>
+
+      <div class="page-card">
+        <h3 class="card-title">Profile</h3>
+        <div class="profile-settings-layout">
+          <form class="settings-form" id="settingsForm">
+            <label class="form-field">
+              <span>Full name</span>
+              <input type="text" value="Tannvi Kamble" />
+            </label>
+            <label class="form-field">
+              <span>Work email</span>
+              <input type="email" value="tannvi.kamble@teamdesk.example" />
+            </label>
+            <label class="form-field">
+              <span>Phone number</span>
+              <input type="tel" value="+91 90000 00000" />
+            </label>
+            <button type="submit" class="btn btn-a settings-save-btn">Save Changes</button>
+          </form>
+
+          <div class="profile-photo-widget" aria-label="Profile photo settings">
+            <div class="profile-image-circle">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M8.5 5.5h7l1.2 2H20a1.5 1.5 0 0 1 1.5 1.5v8A1.5 1.5 0 0 1 20 18.5H4A1.5 1.5 0 0 1 2.5 17V9A1.5 1.5 0 0 1 4 7.5h3.3z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="12" cy="12.5" r="3.2" fill="none" stroke="currentColor" stroke-width="1.6"/>
+              </svg>
+            </div>
+            <button type="button" class="profile-edit-badge" aria-label="Edit profile photo">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M4 20h4l10.5-10.5a2 2 0 0 0-2.8-2.8L5.2 17.2z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+                <path d="m13.5 6.5 4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="page-card">
+        <h3 class="card-title">Notification preferences</h3>
+        <div class="toggle-row">
+          <div>
+            <h4>Email notifications</h4>
+          </div>
+          <button class="toggle-switch is-on" data-toggle="email" aria-pressed="true"><span class="toggle-knob"></span></button>
+        </div>
+        <div class="toggle-row">
+          <div>
+            <h4>SMS alerts</h4>
+            <p>Urgent approvals sent as a text message.</p>
+          </div>
+          <button class="toggle-switch" data-toggle="sms" aria-pressed="false"><span class="toggle-knob"></span></button>
+        </div>
+        <div class="toggle-row">
+          <div>
+            <h4>Weekly digest</h4>
+            <p>A Monday-morning summary of the week ahead.</p>
+          </div>
+          <button class="toggle-switch is-on" data-toggle="digest" aria-pressed="true"><span class="toggle-knob"></span></button>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

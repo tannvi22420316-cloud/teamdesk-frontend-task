@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>TeamDesk — Employee Self-Service Portal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <button class="hamburger" id="hamburgerBtn" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <a href="index.html" class="brand">
+      <span class="brand-mark">TD</span>
+      <span class="brand-name">TeamDesk</span>
+    </a>
+    <div class="header-right">
+      <span class="header-date" id="headerDate"></span>
+      <div class="avatar">TK</div>
+    </div>
+  </header>
+
+  <div class="shell">
+
+    <!-- SIDEBAR (desktop: static column · mobile: off-canvas drawer) -->
+    <aside class="sidebar" id="sidebar">
+      <nav class="side-nav">
+        <a href="index.html" class="side-link active" data-icon="grid">Dashboard</a>
+        <a href="requests.html" class="side-link" data-icon="doc">My Requests</a>
+        <a href="documents.html" class="side-link" data-icon="folder">Documents</a>
+        <a href="directory.html" class="side-link" data-icon="people">Directory</a>
+        <a href="settings.html" class="side-link" data-icon="gear">Settings</a>
+      </nav>
+      <div class="side-footer">
+        <p>Need help?</p>
+        <a href="mailto:it-support@teamdesk.example" class="side-help-link">Contact IT Support →</a>
+      </div>
+    </aside>
+
+    <!-- Backdrop for mobile drawer -->
+    <div class="backdrop" id="backdrop"></div>
+
+    <!-- MAIN CONTENT -->
+    <main class="main">
+      <div class="page-heading">
+        <h1>Hello, Tannvi </h1>
+        <p>Here's what's happening across the workplace today.</p>
+      </div>
+
+      <div class="grid">
+
+        <!-- CONTAINER 1 — Auto-rotating announcement carousel -->
+        <section class="card c1" aria-label="Announcements carousel">
+          <div class="carousel" id="carousel1">
+            <div class="carousel-track" id="carousel1Track">
+              <div class="slide slide--indigo">
+                <span class="slide-eyebrow">Announcement</span>
+                <h2>Q3 town hall is this Friday</h2>
+                <p>Join the leadership team at 4 PM in the main auditorium — or catch the livestream link on Directory.</p>
+              </div>
+              <div class="slide slide--teal">
+                <span class="slide-eyebrow">New feature</span>
+                <h2>Leave requests now approve in one click</h2>
+                <p>Managers can approve or reassign requests directly from their mobile notification.</p>
+              </div>
+              <div class="slide slide--amber">
+                <span class="slide-eyebrow">Reminder</span>
+                <h2>Submit expense claims before the 28th</h2>
+                <p>Claims submitted after month-end close roll over to next cycle's reimbursement.</p>
+              </div>
+            </div>
+            <div class="carousel-dots" id="carousel1Dots"></div>
+          </div>
+        </section>
+
+        <!-- CONTAINER 2 — Text block / summary -->
+        <section class="card c2" aria-label="Today at a glance">
+          <h3 class="card-title">Today at a glance</h3>
+          <ul class="summary-list">
+            <li><span class="dot dot--indigo"></span> 3 requests awaiting your approval</li>
+            <li><span class="dot dot--teal"></span> 1 document expires this week</li>
+            <li><span class="dot dot--amber"></span> 2 colleagues on leave today</li>
+            <li><span class="dot dot--rose"></span> Payslip for July is ready</li>
+          </ul>
+          <p class="card-footnote" id="glanceFootnote">Updated just now</p>
+        </section>
+
+        <!-- CONTAINER 3 — Manual slider with prev/next arrows -->
+        <section class="card c3" aria-label="Company updates slider">
+          <div class="card-header-row">
+            <h3 class="card-title">Company updates</h3>
+            <div class="arrow-controls">
+              <button class="arrow-btn" id="prevBtn" aria-label="Previous update">‹</button>
+              <button class="arrow-btn" id="nextBtn" aria-label="Next update">›</button>
+            </div>
+          </div>
+          <div class="updates-viewport">
+            <div class="updates-track" id="updatesTrack">
+              <article class="update-slide">
+                <span class="update-tag">Policy</span>
+                <h4>Hybrid work policy refreshed for H2</h4>
+                <p>Three in-office days are now flexible across the week instead of fixed Tue–Thu.</p>
+              </article>
+              <article class="update-slide">
+                <span class="update-tag">Wellness</span>
+                <h4>New counselling partner onboarded</h4>
+                <p>Confidential sessions now bookable directly through the Directory tile.</p>
+              </article>
+              <article class="update-slide">
+                <span class="update-tag">IT</span>
+                <h4>VPN maintenance this weekend</h4>
+                <p>Expect brief connectivity drops Saturday 1–3 AM IST during the upgrade window.</p>
+              </article>
+              <article class="update-slide">
+                <span class="update-tag">Facilities</span>
+                <h4>Cafeteria menu now rotates weekly</h4>
+                <p>Vote for next week's specials on the Directory polls tile.</p>
+              </article>
+            </div>
+          </div>
+          <div class="updates-dots" id="updatesDots"></div>
+        </section>
+
+        <!-- CONTAINER 4 — Static content card -->
+        <section class="card c4" aria-label="Upcoming holidays">
+          <h3 class="card-title">Upcoming holidays</h3>
+          <div class="holiday-row" data-date="2026-08-15">
+            <div class="holiday-date">
+              <span class="holiday-day">15</span>
+              <span class="holiday-mon">AUG</span>
+            </div>
+            <div class="holiday-info">
+              <h4>Independence Day</h4>
+              <p>National holiday · office closed</p>
+            </div>
+          </div>
+          <div class="holiday-row" data-date="2026-09-07">
+            <div class="holiday-date">
+              <span class="holiday-day">07</span>
+              <span class="holiday-mon">SEP</span>
+            </div>
+            <div class="holiday-info">
+              <h4>Ganesh Chaturthi</h4>
+              <p>Regional holiday · office closed</p>
+            </div>
+          </div>
+          <div class="holiday-row" data-date="2026-10-02">
+            <div class="holiday-date">
+              <span class="holiday-day">02</span>
+              <span class="holiday-mon">OCT</span>
+            </div>
+            <div class="holiday-info">
+              <h4>Gandhi Jayanti</h4>
+              <p>National holiday · office closed</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- CONTAINER 5 — Two buttons -->
+        <section class="card c5" aria-label="Quick actions">
+          <h3 class="card-title">Quick actions</h3>
+          <p class="card-subtext">Common requests, handled in a couple of taps.</p>
+          <div class="action-buttons">
+            <button class="btn btn-a" id="btnA">Apply for Leave</button>
+            <button class="btn btn-b" id="btnB">Raise a Ticket</button>
+          </div>
+        </section>
+
+        <div class="request-modal" id="leaveRequestModal">
+          <div class="request-modal-card">
+            <div class="modal-header">
+              <h2>Apply for Leave</h2>
+              <button class="close-modal" id="leaveCloseModal" type="button">&times;</button>
+            </div>
+
+            <form class="request-form" id="leaveRequestForm">
+              <label for="leaveType">Request Type</label>
+              <select id="leaveType" required>
+                <option value="">Select Request</option>
+                <option>Annual Leave</option>
+                <option>Sick Leave</option>
+                <option>Work From Home</option>
+              </select>
+
+              <label for="leaveFromDate">From Date</label>
+              <input type="date" id="leaveFromDate" required>
+
+              <label for="leaveToDate">To Date</label>
+              <input type="date" id="leaveToDate" required>
+
+              <label for="leaveReason">Reason</label>
+              <textarea id="leaveReason" rows="4" placeholder="Enter your reason..." required></textarea>
+
+              <div class="modal-buttons">
+                <button type="submit" class="btn btn-a">Submit Request</button>
+                <button type="button" class="btn btn-b" id="leaveCancelModal">Cancel</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <div class="request-modal" id="ticketRequestModal">
+          <div class="request-modal-card">
+            <div class="modal-header">
+              <h2>Raise a Ticket</h2>
+              <button class="close-modal" id="ticketCloseModal" type="button">&times;</button>
+            </div>
+
+            <form class="request-form" id="ticketRequestForm">
+              <label for="ticketType">Ticket Category</label>
+              <select id="ticketType" required>
+                <option value="">Select Category</option>
+                <option>IT Support</option>
+                <option>Facilities</option>
+                <option>HR Query</option>
+              </select>
+
+              <label for="ticketSubject">Subject</label>
+              <input type="text" id="ticketSubject" placeholder="Brief subject" required>
+
+              <label for="ticketDescription">Description</label>
+              <textarea id="ticketDescription" rows="4" placeholder="Describe the issue..." required></textarea>
+
+              <div class="modal-buttons">
+                <button type="submit" class="btn btn-a">Submit Ticket</button>
+                <button type="button" class="btn btn-b" id="ticketCancelModal">Cancel</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- CONTAINER 6 — Auto-rotating spotlight (fade animation) -->
+        <section class="card c6" aria-label="Team spotlight">
+          <h3 class="card-title">Team spotlight</h3>
+          <div class="spotlight" id="spotlight">
+            <div class="spotlight-slide is-active">
+              <div class="spotlight-avatar">RS</div>
+              <p class="spotlight-quote">"Switching to self-service approvals cut our HR turnaround time from two days to two hours."</p>
+              <p class="spotlight-name">Riya Sharma · HR Operations</p>
+            </div>
+            <div class="spotlight-slide">
+              <div class="spotlight-avatar">AK</div>
+              <p class="spotlight-quote">"I raised a facilities ticket during standup and it was assigned before the meeting ended."</p>
+              <p class="spotlight-name">Arjun Kulkarni · Engineering</p>
+            </div>
+            <div class="spotlight-slide">
+              <div class="spotlight-avatar">MP</div>
+              <p class="spotlight-quote">"Onboarding new hires now takes one checklist instead of six separate emails."</p>
+              <p class="spotlight-name">Meera Patil · People Ops</p>
+            </div>
+          </div>
+          <div class="spotlight-dots" id="spotlightDots"></div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

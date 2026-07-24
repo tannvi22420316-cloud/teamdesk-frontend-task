@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>My Requests — TeamDesk</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <button class="hamburger" id="hamburgerBtn" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <a href="index.html" class="brand">
+      <span class="brand-mark">TD</span>
+      <span class="brand-name">TeamDesk</span>
+    </a>
+    <div class="header-right">
+      <span class="header-date" id="headerDate"></span>
+      <div class="avatar">TK</div>
+    </div>
+  </header>
+
+  <div class="shell">
+    <aside class="sidebar" id="sidebar">
+      <nav class="side-nav">
+        <a href="index.html" class="side-link" data-icon="grid">Dashboard</a>
+        <a href="requests.html" class="side-link active" data-icon="doc">My Requests</a>
+        <a href="documents.html" class="side-link" data-icon="folder">Documents</a>
+        <a href="directory.html" class="side-link" data-icon="people">Directory</a>
+        <a href="settings.html" class="side-link" data-icon="gear">Settings</a>
+      </nav>
+      <div class="side-footer">
+        <p>Need help?</p>
+        <a href="mailto:it-support@teamdesk.example" class="side-help-link">Contact IT Support →</a>
+      </div>
+    </aside>
+    <div class="backdrop" id="backdrop"></div>
+
+    <main class="main">
+      <div class="page-heading page-heading--row">
+        <div>
+          <h1>My Requests</h1>
+        </div>
+      </div>
+
+      <div class="page-card">
+        <div class="requests-toolbar">
+          <div class="filter-tabs" id="filterTabs">
+            <button class="filter-tab is-active" data-filter="all">All</button>
+            <button class="filter-tab" data-filter="pending">Pending</button>
+            <button class="filter-tab" data-filter="approved">Approved</button>
+            <button class="filter-tab" data-filter="rejected">Rejected</button>
+          </div>
+          <button class="btn btn-a btn-new-request" id="newRequestBtn">+ New Request</button>
+        </div>
+
+        <div class="request-list" id="requestList">
+          <div class="request-row" data-status="pending">
+            <div class="request-icon request-icon--indigo">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M4 20c3-1.5 5-1.5 8 0s5 1.5 8 0" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                <path d="M12 4v9M12 6c2 0 3.5 1 4.5 2.5M12 9.5c-1.6 0-2.8.8-3.6 2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="request-info">
+              <h4>Annual Leave</h4>
+              <p>12 Aug – 14 Aug 2026 · 3 days</p>
+            </div>
+            <span class="status-badge status-badge--pending">Pending</span>
+          </div>
+          <div class="request-row" data-status="approved">
+            <div class="request-icon request-icon--teal">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M4 11.5 12 4l8 7.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M6 10.5V19a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1v-8.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+                <path d="M10 20v-4.5h4V20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="request-info">
+              <h4>Work From Home</h4>
+              <p>28 Jul 2026 · 1 day</p>
+            </div>
+            <span class="status-badge status-badge--approved">Approved</span>
+          </div>
+          <div class="request-row" data-status="approved">
+            <div class="request-icon request-icon--amber">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="3.5" y="6.5" width="17" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/>
+                <path d="M3.5 10h17" fill="none" stroke="currentColor" stroke-width="1.6"/>
+                <circle cx="16.5" cy="14" r="1.3" fill="currentColor"/>
+              </svg>
+            </div>
+            <div class="request-info">
+              <h4>Travel Expense Claim</h4>
+              <p>Client visit — Mumbai · ₹4,250</p>
+            </div>
+            <span class="status-badge status-badge--approved">Approved</span>
+          </div>
+          <div class="request-row" data-status="rejected">
+            <div class="request-icon request-icon--rose">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="3.5" y="5" width="17" height="11" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/>
+                <path d="M9 20h6M12 16v4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="request-info">
+              <h4>Equipment Request — Monitor</h4>
+              <p>Requested 02 Jul 2026</p>
+            </div>
+            <span class="status-badge status-badge--rejected">Rejected</span>
+          </div>
+          <div class="request-row" data-status="pending">
+            <div class="request-icon request-icon--indigo">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="5" y="10.5" width="14" height="7" rx="3.5" fill="none" stroke="currentColor" stroke-width="1.6" transform="rotate(-45 12 14)"/>
+                <path d="M9.5 14h5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" transform="rotate(-45 12 14)"/>
+              </svg>
+            </div>
+            <div class="request-info">
+              <h4>Sick Leave</h4>
+              <p>22 Jul 2026 · 1 day</p>
+            </div>
+            <span class="status-badge status-badge--pending">Pending</span>
+          </div>
+        </div>
+
+        <p class="empty-state" id="emptyState" hidden>No requests match this filter yet.</p>
+      </div>
+
+      <!-- New Request panel (toggled) -->
+      <div class="request-modal" id="newRequestModal">
+
+        <div class="request-modal-card">
+
+          <div class="modal-header">
+            <h2>New Request</h2>
+            <button class="close-modal" id="closeModal">&times;</button>
+          </div>
+
+          <form class="request-form" id="requestForm">
+
+            <label>Request Type</label>
+            <select id="requestType">
+              <option value="">Select Request</option>
+              <option>Annual Leave</option>
+              <option>Sick Leave</option>
+              <option>Work From Home</option>
+              <option>Travel Expense</option>
+              <option>Equipment Request</option>
+            </select>
+
+            <label>From Date</label>
+            <input type="date" id="fromDate">
+
+            <label>To Date</label>
+            <input type="date" id="toDate">
+
+            <label>Reason</label>
+            <textarea id="reason" rows="4" placeholder="Enter your reason..."></textarea>
+
+            <div class="modal-buttons">
+              <button type="submit" class="btn btn-a">
+                Submit Request
+              </button>
+
+              <button type="button" class="btn btn-b" id="cancelModal">
+                Cancel
+              </button>
+            </div>
+
+          </form>
+
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
