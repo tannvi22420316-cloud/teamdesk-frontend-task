@@ -599,6 +599,7 @@ button { font-family: var(--font-body); cursor: pointer; border: none; backgroun
 .settings-form { display: flex; flex-direction: column; gap: 16px; max-width: 420px; }
 .form-field { display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 600; color: var(--slate); }
 .form-field input {
+  width: 100%;
   padding: 11px 14px; border-radius: 10px; border: 1.5px solid var(--border);
   font-family: var(--font-body); font-size: 14px; color: var(--ink); background: #fff;
 }
@@ -647,6 +648,41 @@ button { font-family: var(--font-body); cursor: pointer; border: none; backgroun
 .profile-edit-badge svg {
   width: 18px;
   height: 18px;
+}
+
+@media (max-width: 768px) {
+  .profile-settings-layout {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .settings-form {
+    max-width: 100%;
+    order: 2;
+  }
+  .profile-photo-widget {
+    order: 1;
+    margin-left: 0;
+    min-height: auto;
+    padding: 6px 0 10px;
+  }
+  .profile-image-circle {
+    width: 128px;
+    height: 128px;
+  }
+  .profile-image-circle svg {
+    width: 38px;
+    height: 38px;
+  }
+  .profile-edit-badge {
+    left: calc(50% + 32px);
+    bottom: 4px;
+    width: 34px;
+    height: 34px;
+  }
+  .profile-edit-badge svg {
+    width: 14px;
+    height: 14px;
+  }
 }
 
 .toggle-row {
