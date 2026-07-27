@@ -33,12 +33,13 @@ document.addEventListener('DOMContentLoaded', () => {
   // recompute it live if we're actually on the requests page.
   const requestsSideLink = document.querySelector('.side-link[href="requests.html"]');
   if (requestsSideLink) {
-    const label = requestsSideLink.textContent.trim();
-    requestsSideLink.innerHTML = `<span class="side-link-label">${label}</span>`;
-    const badge = document.createElement('span');
-    badge.className = 'nav-badge';
+    let badge = requestsSideLink.querySelector('.nav-badge');
+    if (!badge) {
+      badge = document.createElement('span');
+      badge.className = 'nav-badge';
+      requestsSideLink.appendChild(badge);
+    }
     badge.id = 'pendingBadge';
-    requestsSideLink.appendChild(badge);
 
     const seedCount = document.getElementById('requestList')
       ? document.querySelectorAll('#requestList .request-row[data-status="pending"]').length
@@ -62,28 +63,81 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  /* ---------- Hamburger / off-canvas sidebar (present on every page) ---------- */
+  /* ---------- Hamburger / collapsible sidebar (present on every page) ---------- */
   const hamburgerBtn = document.getElementById('hamburgerBtn');
   const sidebar = document.getElementById('sidebar');
   const backdrop = document.getElementById('backdrop');
 
   if (hamburgerBtn && sidebar && backdrop) {
-    const openSidebar = () => {
-      sidebar.classList.add('is-open');
-      backdrop.classList.add('is-open');
-      hamburgerBtn.setAttribute('aria-expanded', 'true');
+    const SIDEBAR_KEY = 'td-sidebar-collapsed';
+    const isMobile = () => window.innerWidth <= 768;
+
+    const applySidebarState = (collapsed) => {
+      sidebar.classList.toggle('is-collapsed', collapsed);
+      hamburgerBtn.setAttribute('aria-expanded', String(!collapsed));
+      if (!collapsed && isMobile()) {
+        backdrop.classList.add('is-open');
+      } else {
+        backdrop.classList.remove('is-open');
+      }
     };
-    const closeSidebar = () => {
-      sidebar.classList.remove('is-open');
-      backdrop.classList.remove('is-open');
-      hamburgerBtn.setAttribute('aria-expanded', 'false');
-    };
+
+    const stored = localStorage.getItem(SIDEBAR_KEY);
+    let collapsed = stored === null ? isMobile() : stored === 'true';
+    applySidebarState(collapsed);
+
     hamburgerBtn.addEventListener('click', () => {
-      sidebar.classList.contains('is-open') ? closeSidebar() : openSidebar();
+      collapsed = !collapsed;
+      localStorage.setItem(SIDEBAR_KEY, String(collapsed));
+      applySidebarState(collapsed);
     });
-    backdrop.addEventListener('click', closeSidebar);
-    window.addEventListener('resize', () => { if (window.innerWidth > 768) closeSidebar(); });
+
+    backdrop.addEventListener('click', () => {
+      collapsed = true;
+      localStorage.setItem(SIDEBAR_KEY, 'true');
+      applySidebarState(collapsed);
+    });
+
+    window.addEventListener('resize', () => {
+      if (!isMobile()) backdrop.classList.remove('is-open');
+      else if (!collapsed) backdrop.classList.add('is-open');
+    });
   }
+
+  /* ---------- Login / Logout button ---------- */
+  const authBtn = document.getElementById('authBtn');
+  if (authBtn) {
+    const iconLogout = authBtn.querySelector('.icon-logout');
+    const iconLogin = authBtn.querySelector('.icon-login');
+    const authLabel = authBtn.querySelector('.auth-label');
+    const AUTH_KEY = 'td-logged-in';
+
+    const applyAuthState = (loggedIn) => {
+      authBtn.classList.toggle('is-logged-out', !loggedIn);
+      authBtn.setAttribute('aria-pressed', String(loggedIn));
+      if (authLabel) authLabel.textContent = loggedIn ? 'Logout' : 'Login';
+      if (iconLogout) iconLogout.hidden = !loggedIn;
+      if (iconLogin) iconLogin.hidden = loggedIn;
+    };
+
+    let loggedIn = localStorage.getItem(AUTH_KEY) !== 'false';
+    applyAuthState(loggedIn);
+
+    authBtn.addEventListener('click', () => {
+      loggedIn = !loggedIn;
+      localStorage.setItem(AUTH_KEY, String(loggedIn));
+      applyAuthState(loggedIn);
+      showToast(loggedIn ? 'Logged back in — welcome, Tannvi!' : 'You have been logged out.');
+    });
+  }
+
+  /* ---------- Placeholder links (pages not yet built) — sidebar items and shortcut tiles ---------- */
+  document.querySelectorAll('[data-placeholder]').forEach((link) => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      showToast(`${link.dataset.placeholder} is coming soon.`);
+    });
+  });
 
   /* ---------- Generic dot-indicator builder ---------- */
   function buildDots(container, count, activeIndex, onClick) {
@@ -642,5 +696,80 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  /* =======================================================
+     EXTRA FEATURES — Shortcuts strip + Calendar widget
+     ======================================================= */
+
+  // Shortcuts strip: buttons with data-open-modal reuse the existing
+  // leave / ticket request modals already wired up above.
+  document.querySelectorAll('.shortcut-tile[data-open-modal]').forEach(tile => {
+    tile.addEventListener('click', () => {
+      const modalId = tile.getAttribute('data-open-modal');
+      const modal = document.getElementById(modalId);
+      if (!modal) return;
+      document.querySelectorAll('.request-modal').forEach(m => m.classList.remove('show'));
+      modal.classList.add('show');
+    });
+  });
+
+  // Mini calendar widget — renders a navigable month view with
+  // colour-coded event dots (Annual Leave / Unplanned Leave / Holiday /
+  // Sick Leave), similar to the reference ESS dashboard.
+  const calendarGrid = document.getElementById('calendarGrid');
+  const calMonthLabel = document.getElementById('calMonthLabel');
+  const calPrevBtn = document.getElementById('calPrev');
+  const calNextBtn = document.getElementById('calNext');
+  const calTodayBtn = document.getElementById('calToday');
+
+  if (calendarGrid) {
+    const today = new Date();
+    let viewYear = today.getFullYear();
+    let viewMonth = today.getMonth();
+    const monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+
+    // Sample event data — swap for real data from your backend.
+    // key: day-of-month (only applied to the current real month), value: legend colour
+    const sampleEvents = { 5: 'teal', 12: 'indigo', 18: 'amber', 24: 'rose' };
+
+    function renderCalendar() {
+      if (calMonthLabel) calMonthLabel.textContent = `${monthNames[viewMonth]} ${viewYear}`;
+
+      const firstDay = new Date(viewYear, viewMonth, 1).getDay();
+      const daysInMonth = new Date(viewYear, viewMonth + 1, 0).getDate();
+      const isCurrentMonth = viewYear === today.getFullYear() && viewMonth === today.getMonth();
+
+      const dows = ['S','M','T','W','T','F','S'];
+      let html = dows.map(d => `<span class="cal-dow">${d}</span>`).join('');
+
+      for (let i = 0; i < firstDay; i++) {
+        html += `<span class="cal-day is-blank"></span>`;
+      }
+      for (let day = 1; day <= daysInMonth; day++) {
+        const isToday = isCurrentMonth && day === today.getDate();
+        const eventColor = isCurrentMonth ? sampleEvents[day] : null;
+        const style = eventColor ? ` style="--event-color:var(--${eventColor})"` : '';
+        html += `<span class="cal-day${isToday ? ' is-today' : ''}${eventColor ? ' has-event' : ''}"${style}>${day}</span>`;
+      }
+      calendarGrid.innerHTML = html;
+    }
+
+    if (calPrevBtn) calPrevBtn.addEventListener('click', () => {
+      viewMonth -= 1;
+      if (viewMonth < 0) { viewMonth = 11; viewYear -= 1; }
+      renderCalendar();
+    });
+    if (calNextBtn) calNextBtn.addEventListener('click', () => {
+      viewMonth += 1;
+      if (viewMonth > 11) { viewMonth = 0; viewYear += 1; }
+      renderCalendar();
+    });
+    if (calTodayBtn) calTodayBtn.addEventListener('click', () => {
+      viewYear = today.getFullYear();
+      viewMonth = today.getMonth();
+      renderCalendar();
+    });
+
+    renderCalendar();
+  }
 
 });

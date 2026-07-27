@@ -6,12 +6,12 @@
 <title>Directory — TeamDesk</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css" />
+<link rel="stylesheet" href="style.css?v=3" />
 </head>
 <body>
 
   <header class="site-header">
-    <button class="hamburger" id="hamburgerBtn" aria-label="Toggle menu" aria-expanded="false">
+    <button class="hamburger" id="hamburgerBtn" aria-label="Toggle menu" aria-expanded="true">
       <span></span><span></span><span></span>
     </button>
     <a href="index.html" class="brand">
@@ -21,18 +21,78 @@
     <div class="header-right">
       <span class="header-date" id="headerDate"></span>
       <div class="avatar">TK</div>
+      <button class="auth-btn" id="authBtn" type="button" aria-pressed="true">
+        <span class="auth-label">Logout</span>
+      </button>
     </div>
   </header>
 
   <div class="shell">
     <aside class="sidebar" id="sidebar">
-      <nav class="side-nav">
-        <a href="index.html" class="side-link" data-icon="grid">Dashboard</a>
-        <a href="requests.html" class="side-link" data-icon="doc">My Requests</a>
-        <a href="documents.html" class="side-link" data-icon="folder">Documents</a>
-        <a href="directory.html" class="side-link active" data-icon="people">Directory</a>
-        <a href="settings.html" class="side-link" data-icon="gear">Settings</a>
-      </nav>
+      <div class="sidebar-scroll">
+        <div class="sidebar-profile">
+          <div class="sidebar-profile-photo">
+            <img src="https://i.pravatar.cc/120?img=5" alt="Tannvi Kamble" />
+          </div>
+          <p class="sidebar-profile-name">Tannvi Kamble</p>
+        </div>
+        <nav class="side-nav">
+      <a href="index.html" class="side-link">
+          <span class="side-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11.5 12 4l8 7.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 10.5V19a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1v-8.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M10 20v-4.5h4V20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></span>
+          <span class="side-link-label">Home</span>
+      </a>
+      <a href="settings.html" class="side-link">
+          <span class="side-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8.5" r="3.4" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M5 19.5c0-3.6 3.1-6 7-6s7 2.4 7 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
+          <span class="side-link-label">My Profile</span>
+      </a>
+      <a href="documents.html" class="side-link">
+          <span class="side-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8.5A2.5 2.5 0 0 1 6.5 6h3.6l1.6 2h5.8A2.5 2.5 0 0 1 20 10.5v6A2.5 2.5 0 0 1 17.5 19h-11A2.5 2.5 0 0 1 4 16.5z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></span>
+          <span class="side-link-label">My Documents</span>
+      </a>
+      <a href="requests.html" class="side-link">
+          <span class="side-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3.5h6l4 4V20a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1V4.5a1 1 0 0 1 1-1Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9.5 12.5h5M9.5 16h5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
+          <span class="side-link-label">My Request</span>
+      </a>
+      <a href="directory.html" class="side-link active">
+          <span class="side-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8.5" r="3" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M3.5 19c0-3 2.5-5 5.5-5s5.5 2 5.5 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="17" cy="9" r="2.3" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M15.2 13.6c2.4.2 4.3 1.9 4.3 4.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
+          <span class="side-link-label">Directory</span>
+      </a>
+      <a href="#" class="side-link" data-placeholder="Timesheets">
+          <span class="side-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M3.5 9.5h17" stroke="currentColor" stroke-width="1.6"/></svg></span>
+          <span class="side-link-label">Timesheets</span>
+          <span class="nav-badge">1</span>
+      </a>
+      <a href="#" class="side-link" data-placeholder="Checklists">
+          <span class="side-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5 9.5 17 19 6.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span class="side-link-label">Checklists</span>
+          <span class="nav-badge">1</span>
+      </a>
+      <a href="#" class="side-link" data-placeholder="Expenses">
+          <span class="side-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="6.5" width="17" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M3.5 10h17" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="16.5" cy="14" r="1.3" fill="currentColor"/></svg></span>
+          <span class="side-link-label">Expenses</span>
+      </a>
+      <a href="#" class="side-link" data-placeholder="Forms">
+          <span class="side-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v1.3a1.7 1.7 0 0 0 0 3.4V15a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-1.3a1.7 1.7 0 0 0 0-3.4z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></span>
+          <span class="side-link-label">Forms</span>
+      </a>
+      <a href="#" class="side-link" data-placeholder="News">
+          <span class="side-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5.5" width="13" height="14" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M16.5 8.5H19a1.5 1.5 0 0 1 1.5 1.5v8a1.5 1.5 0 0 1-1.5 1.5h-2.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M6.5 9h6M6.5 12h6M6.5 15h4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
+          <span class="side-link-label">News</span>
+      </a>
+      <a href="#" class="side-link" data-placeholder="Library">
+          <span class="side-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 6c-1.6-1.2-3.8-1.7-6-1.5v13c2.2-.2 4.4.3 6 1.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 6c1.6-1.2 3.8-1.7 6-1.5v13c-2.2-.2-4.4.3-6 1.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 6v13" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
+          <span class="side-link-label">Library</span>
+      </a>
+      <a href="#" class="side-link" data-placeholder="Pinboard">
+          <span class="side-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5c-2.5 0-4.5 2-4.5 4.5 0 3 4.5 8.5 4.5 8.5s4.5-5.5 4.5-8.5c0-2.5-2-4.5-4.5-4.5Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="8" r="1.8" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></span>
+          <span class="side-link-label">Pinboard</span>
+      </a>
+      <a href="#" class="side-link" data-placeholder="Time Off & Leave">
+          <span class="side-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M3.5 9.5h17M8 3v3.5M16 3v3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
+          <span class="side-link-label">Time Off &amp; Leave</span>
+      </a>
+        </nav>
+      </div>
       <div class="side-footer">
         <p>Need help?</p>
         <a href="mailto:it-support@teamdesk.example" class="side-help-link">Contact IT Support →</a>
@@ -100,6 +160,6 @@
 
   <div class="chat-dock" id="chatDock"></div>
 
-  <script src="script.js"></script>
+  <script src="script.js?v=3"></script>
 </body>
 </html>

@@ -6,13 +6,13 @@
 <title>TeamDesk — Employee Self-Service Portal</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css" />
+<link rel="stylesheet" href="style.css?v=3" />
 </head>
 <body>
 
   <!-- HEADER -->
   <header class="site-header">
-    <button class="hamburger" id="hamburgerBtn" aria-label="Toggle menu" aria-expanded="false">
+    <button class="hamburger" id="hamburgerBtn" aria-label="Toggle menu" aria-expanded="true">
       <span></span><span></span><span></span>
     </button>
     <a href="index.html" class="brand">
@@ -22,6 +22,9 @@
     <div class="header-right">
       <span class="header-date" id="headerDate"></span>
       <div class="avatar">TK</div>
+      <button class="auth-btn" id="authBtn" type="button" aria-pressed="true">
+        <span class="auth-label">Logout</span>
+      </button>
     </div>
   </header>
 
@@ -29,13 +32,70 @@
 
     <!-- SIDEBAR (desktop: static column · mobile: off-canvas drawer) -->
     <aside class="sidebar" id="sidebar">
-      <nav class="side-nav">
-        <a href="index.html" class="side-link active" data-icon="grid">Dashboard</a>
-        <a href="requests.html" class="side-link" data-icon="doc">My Requests</a>
-        <a href="documents.html" class="side-link" data-icon="folder">Documents</a>
-        <a href="directory.html" class="side-link" data-icon="people">Directory</a>
-        <a href="settings.html" class="side-link" data-icon="gear">Settings</a>
-      </nav>
+      <div class="sidebar-scroll">
+        <div class="sidebar-profile">
+          <div class="sidebar-profile-photo">
+            <img src="https://i.pravatar.cc/120?img=5" alt="Tannvi Kamble" />
+          </div>
+          <p class="sidebar-profile-name">Tannvi Kamble</p>
+        </div>
+        <nav class="side-nav">
+      <a href="index.html" class="side-link active">
+          <span class="side-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11.5 12 4l8 7.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 10.5V19a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1v-8.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M10 20v-4.5h4V20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></span>
+          <span class="side-link-label">Home</span>
+      </a>
+      <a href="settings.html" class="side-link">
+          <span class="side-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8.5" r="3.4" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M5 19.5c0-3.6 3.1-6 7-6s7 2.4 7 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
+          <span class="side-link-label">My Profile</span>
+      </a>
+      <a href="documents.html" class="side-link">
+          <span class="side-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8.5A2.5 2.5 0 0 1 6.5 6h3.6l1.6 2h5.8A2.5 2.5 0 0 1 20 10.5v6A2.5 2.5 0 0 1 17.5 19h-11A2.5 2.5 0 0 1 4 16.5z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></span>
+          <span class="side-link-label">My Documents</span>
+      </a>
+      <a href="requests.html" class="side-link">
+          <span class="side-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3.5h6l4 4V20a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1V4.5a1 1 0 0 1 1-1Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9.5 12.5h5M9.5 16h5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
+          <span class="side-link-label">My Request</span>
+      </a>
+      <a href="directory.html" class="side-link">
+          <span class="side-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8.5" r="3" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M3.5 19c0-3 2.5-5 5.5-5s5.5 2 5.5 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="17" cy="9" r="2.3" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M15.2 13.6c2.4.2 4.3 1.9 4.3 4.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
+          <span class="side-link-label">Directory</span>
+      </a>
+      <a href="#" class="side-link" data-placeholder="Timesheets">
+          <span class="side-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M3.5 9.5h17" stroke="currentColor" stroke-width="1.6"/></svg></span>
+          <span class="side-link-label">Timesheets</span>
+          <span class="nav-badge">1</span>
+      </a>
+      <a href="#" class="side-link" data-placeholder="Checklists">
+          <span class="side-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5 9.5 17 19 6.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span class="side-link-label">Checklists</span>
+          <span class="nav-badge">1</span>
+      </a>
+      <a href="#" class="side-link" data-placeholder="Expenses">
+          <span class="side-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="6.5" width="17" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M3.5 10h17" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="16.5" cy="14" r="1.3" fill="currentColor"/></svg></span>
+          <span class="side-link-label">Expenses</span>
+      </a>
+      <a href="#" class="side-link" data-placeholder="Forms">
+          <span class="side-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v1.3a1.7 1.7 0 0 0 0 3.4V15a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-1.3a1.7 1.7 0 0 0 0-3.4z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></span>
+          <span class="side-link-label">Forms</span>
+      </a>
+      <a href="#" class="side-link" data-placeholder="News">
+          <span class="side-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5.5" width="13" height="14" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M16.5 8.5H19a1.5 1.5 0 0 1 1.5 1.5v8a1.5 1.5 0 0 1-1.5 1.5h-2.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M6.5 9h6M6.5 12h6M6.5 15h4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
+          <span class="side-link-label">News</span>
+      </a>
+      <a href="#" class="side-link" data-placeholder="Library">
+          <span class="side-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 6c-1.6-1.2-3.8-1.7-6-1.5v13c2.2-.2 4.4.3 6 1.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 6c1.6-1.2 3.8-1.7 6-1.5v13c-2.2-.2-4.4.3-6 1.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 6v13" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
+          <span class="side-link-label">Library</span>
+      </a>
+      <a href="#" class="side-link" data-placeholder="Pinboard">
+          <span class="side-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5c-2.5 0-4.5 2-4.5 4.5 0 3 4.5 8.5 4.5 8.5s4.5-5.5 4.5-8.5c0-2.5-2-4.5-4.5-4.5Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="8" r="1.8" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></span>
+          <span class="side-link-label">Pinboard</span>
+      </a>
+      <a href="#" class="side-link" data-placeholder="Time Off & Leave">
+          <span class="side-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M3.5 9.5h17M8 3v3.5M16 3v3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
+          <span class="side-link-label">Time Off &amp; Leave</span>
+      </a>
+        </nav>
+      </div>
       <div class="side-footer">
         <p>Need help?</p>
         <a href="mailto:it-support@teamdesk.example" class="side-help-link">Contact IT Support →</a>
@@ -47,14 +107,51 @@
 
     <!-- MAIN CONTENT -->
     <main class="main">
-      <div class="page-heading">
-        <h1>Hello, Tannvi </h1>
-        <p>Here's what's happening across the workplace today.</p>
+      <!-- PROFILE OVERVIEW CARD -->
+      <div class="grid extra-grid">
+        <section class="card ex-12 profile-overview" aria-label="Employee profile overview">
+          <div class="profile-overview-body">
+            <div class="profile-overview-top">
+              <div class="directory-avatar profile-overview-photo">TK</div>
+              <div class="profile-overview-id">
+                <h2>Tannvi Kamble</h2>
+                <p>Frontend Developer Intern · Engineering · Pune Office</p>
+              </div>
+            </div>
+            <table class="profile-info-table">
+              <tbody>
+                <tr>
+                  <td class="pit-label">Employee ID</td>
+                  <td class="pit-value">TDK-014</td>
+                  <td class="pit-label">Manager</td>
+                  <td class="pit-value">Sameer Joshi</td>
+                </tr>
+                <tr>
+                  <td class="pit-label">Joining Date</td>
+                  <td class="pit-value">01 Jan 2026</td>
+                  <td class="pit-label">Status</td>
+                  <td class="pit-value pit-value--accent">Full Time · Active</td>
+                </tr>
+                <tr>
+                  <td class="pit-label">Age</td>
+                  <td class="pit-value">23</td>
+                  <td class="pit-label">Birth Date</td>
+                  <td class="pit-value">14 Mar 2003</td>
+                </tr>
+                <tr>
+                  <td class="pit-label">Gender</td>
+                  <td class="pit-value">Female</td>
+                  <td class="pit-label">Employee Type</td>
+                  <td class="pit-value">Intern</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
       </div>
 
+      <!-- CONTAINER 1 — Auto-rotating announcement carousel -->
       <div class="grid">
-
-        <!-- CONTAINER 1 — Auto-rotating announcement carousel -->
         <section class="card c1" aria-label="Announcements carousel">
           <div class="carousel" id="carousel1">
             <div class="carousel-track" id="carousel1Track">
@@ -77,6 +174,204 @@
             <div class="carousel-dots" id="carousel1Dots"></div>
           </div>
         </section>
+      </div>
+
+      <!-- SHORTCUTS -->
+      <div class="grid extra-grid">
+        <section class="card ex-12 shortcuts-strip" aria-label="Shortcuts">
+        <h3 class="card-title">Shortcuts</h3>
+        <div class="shortcuts-grid">
+          <a href="#" class="request-row shortcut-item" data-placeholder="Time Off &amp; Leave">
+            <div class="request-icon request-icon--indigo">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M3.5 9.5h17M8 3v3.5M16 3v3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+            </div>
+            <div class="request-info"><h4>Request Time-Off</h4></div>
+          </a>
+
+          <a href="directory.html" class="request-row shortcut-item">
+            <div class="request-icon request-icon--teal">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8.5" r="3" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M3.5 19c0-3 2.5-5 5.5-5s5.5 2 5.5 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="17" cy="9" r="2.3" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M15.2 13.6c2.4.2 4.3 1.9 4.3 4.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+            </div>
+            <div class="request-info"><h4>Company Directory</h4></div>
+          </a>
+
+          <a href="settings.html" class="request-row shortcut-item">
+            <div class="request-icon request-icon--amber">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8.5" r="3.4" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M5 19.5c0-3.6 3.1-6 7-6s7 2.4 7 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+            </div>
+            <div class="request-info"><h4>My Profile</h4></div>
+          </a>
+
+          <a href="#" class="request-row shortcut-item" data-placeholder="Checklists">
+            <div class="request-icon request-icon--rose">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5 9.5 17 19 6.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="request-info"><h4>Complete Checklist</h4></div>
+          </a>
+
+          <a href="#" class="request-row shortcut-item" data-placeholder="Timesheets">
+            <div class="request-icon request-icon--indigo">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M3.5 9.5h17" stroke="currentColor" stroke-width="1.6"/></svg>
+            </div>
+            <div class="request-info"><h4>Fill in Timesheets</h4></div>
+          </a>
+
+          <a href="#" class="request-row shortcut-item" data-placeholder="News">
+            <div class="request-icon request-icon--teal">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5.5" width="13" height="14" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M16.5 8.5H19a1.5 1.5 0 0 1 1.5 1.5v8a1.5 1.5 0 0 1-1.5 1.5h-2.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M6.5 9h6M6.5 12h6M6.5 15h4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+            </div>
+            <div class="request-info"><h4>News</h4></div>
+          </a>
+
+          <a href="#" class="request-row shortcut-item" data-placeholder="Expenses">
+            <div class="request-icon request-icon--amber">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="6.5" width="17" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M3.5 10h17" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="16.5" cy="14" r="1.3" fill="currentColor"/></svg>
+            </div>
+            <div class="request-info"><h4>File Expense Claim</h4></div>
+          </a>
+
+          <a href="#" class="request-row shortcut-item" data-placeholder="Pinboard">
+            <div class="request-icon request-icon--rose">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5c-2.5 0-4.5 2-4.5 4.5 0 3 4.5 8.5 4.5 8.5s4.5-5.5 4.5-8.5c0-2.5-2-4.5-4.5-4.5Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="8" r="1.8" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+            </div>
+            <div class="request-info"><h4>Pinboard</h4></div>
+          </a>
+        </div>
+        </section>
+      </div>
+
+      <!-- TIMESHEETS / CHECKLISTS / CALENDAR ROW -->
+      <div class="grid extra-grid">
+        <section class="card ex-4" aria-label="Active timesheets">
+          <h3 class="card-title">Active Timesheets</h3>
+          <p class="card-subtext">You have 1 active timesheet that needs updating.</p>
+          <div class="request-row">
+            <div class="request-icon request-icon--indigo">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M3.5 9.5h17" stroke="currentColor" stroke-width="1.6"/></svg>
+            </div>
+            <div class="request-info"><h4>Mon, 20 Jul – Sun, 26 Jul</h4></div>
+            <button class="btn-b ex-update-btn">Update</button>
+          </div>
+        </section>
+
+        <section class="card ex-4" aria-label="Active checklists">
+          <h3 class="card-title">Active Checklists</h3>
+          <p class="card-subtext">You have 1 active checklist that needs completing.</p>
+          <div class="request-row">
+            <div class="request-icon request-icon--teal">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5 9.5 17 19 6.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="request-info"><h4>New Hire Equipment Checklist</h4></div>
+            <button class="btn-b ex-update-btn">Update</button>
+          </div>
+        </section>
+
+        <section class="card ex-4" aria-label="Calendar">
+          <div class="calendar-header-row">
+            <h3 class="card-title" id="calMonthLabel">Calendar</h3>
+            <div class="calendar-nav">
+              <button type="button" id="calPrev" class="btn-b cal-nav-btn" aria-label="Previous month">‹</button>
+              <button type="button" id="calToday" class="btn-b cal-nav-btn">today</button>
+              <button type="button" id="calNext" class="btn-b cal-nav-btn" aria-label="Next month">›</button>
+            </div>
+          </div>
+          <div class="calendar-grid" id="calendarGrid"></div>
+          <div class="calendar-legend summary-list">
+            <span><i class="dot dot--indigo"></i> Annual Leave</span>
+            <span><i class="dot dot--amber"></i> Unplanned Leave</span>
+            <span><i class="dot dot--teal"></i> Holiday</span>
+            <span><i class="dot dot--rose"></i> Sick Leave</span>
+          </div>
+        </section>
+      </div>
+
+      <!-- REPORTING / REVIEWS / JOB PORTAL ROW -->
+      <div class="grid extra-grid">
+        <section class="card ex-4" aria-label="You report to">
+          <h3 class="card-title">You Report To</h3>
+          <div class="report-to-row">
+            <div class="directory-avatar report-to-avatar">SJ</div>
+            <div class="directory-info">
+              <h4>Sameer Joshi</h4>
+              <p>Engineering Manager</p>
+            </div>
+          </div>
+          <a href="mailto:sameer.joshi@teamdesk.example" class="side-help-link report-to-email">sameer.joshi@teamdesk.example</a>
+        </section>
+
+        <section class="card ex-4" aria-label="Recent reviews">
+          <h3 class="card-title">Recent Reviews</h3>
+          <div class="info-list">
+            <div class="info-row">
+              <div><h4>Mid-Year Review</h4><p>25 Jul 2026</p></div>
+              <span class="status-badge status-badge--approved">Completed</span>
+            </div>
+            <div class="info-row">
+              <div><h4>Peer Evaluation</h4><p>02 May 2026</p></div>
+              <span class="status-badge status-badge--approved">Completed</span>
+            </div>
+            <div class="info-row">
+              <div><h4>Annual Review</h4><p>30 Nov 2026</p></div>
+              <span class="status-badge status-badge--pending">Planned</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="card ex-4" aria-label="Job portal">
+          <h3 class="card-title">Job Portal</h3>
+          <p class="card-subtext">Your company jobs portal is at:</p>
+          <a href="#" target="_blank" rel="noopener" class="side-help-link">teamdesk.hrpartner.io/jobs →</a>
+          <p class="card-subtext job-portal-note">There are currently 4 jobs listed on the portal.</p>
+        </section>
+      </div>
+
+      <!-- TRAINING / ASSETS ROW -->
+      <div class="grid extra-grid">
+        <section class="card ex-6" aria-label="Recent training">
+          <h3 class="card-title">Recent Training</h3>
+          <div class="info-list">
+            <div class="info-row">
+              <div><h4>Workplace Security Basics</h4><p>Started 10 Jun 2026</p></div>
+              <span class="status-badge status-badge--approved">Completed</span>
+            </div>
+            <div class="info-row">
+              <div><h4>React Fundamentals</h4><p>Started 02 Jul 2026</p></div>
+              <span class="status-badge status-badge--pending">Pending</span>
+            </div>
+            <div class="info-row">
+              <div><h4>First Aid (Basic)</h4><p>Started 15 Jan 2026</p></div>
+              <span class="status-badge status-badge--approved">Completed</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="card ex-6" aria-label="Assets in your care">
+          <h3 class="card-title">Assets in Your Care</h3>
+          <div class="info-list">
+            <div class="info-row">
+              <div><h4>Dell Latitude Laptop</h4><p>AST-2291 · Issued 05 Jan 2025</p></div>
+            </div>
+            <div class="info-row">
+              <div><h4>Building Access Card</h4><p>AST-0187 · Issued 14 Jan 2025</p></div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- POSITION HISTORY -->
+      <div class="grid extra-grid">
+        <section class="card ex-12" aria-label="Position history">
+          <h3 class="card-title">Your Position History</h3>
+          <div class="info-list">
+            <div class="info-row">
+              <div><h4>Frontend Developer Intern</h4><p>Commenced 01 Jan 2026</p></div>
+              <span class="status-badge status-badge--approved">Current</span>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <div class="grid">
 
         <!-- CONTAINER 2 — Text block / summary -->
         <section class="card c2" aria-label="Today at a glance">
@@ -261,6 +556,6 @@
     </main>
   </div>
 
-  <script src="script.js"></script>
+  <script src="script.js?v=3"></script>
 </body>
 </html>
