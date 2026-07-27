@@ -179,7 +179,10 @@
       <!-- SHORTCUTS -->
       <div class="grid extra-grid">
         <section class="card ex-12 shortcuts-strip" aria-label="Shortcuts">
-        <h3 class="card-title">Shortcuts</h3>
+        <div class="card-title-row">
+          <span class="card-icon-badge tint-indigo"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="4" width="6.5" height="6.5" rx="1.3"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.3"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.3"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.3"/></svg></span>
+          <h3 class="card-title">Shortcuts</h3>
+        </div>
         <div class="shortcuts-grid">
           <a href="#" class="request-row shortcut-item" data-placeholder="Time Off &amp; Leave">
             <div class="request-icon request-icon--indigo">
@@ -243,7 +246,10 @@
       <!-- TIMESHEETS / CHECKLISTS / CALENDAR ROW -->
       <div class="grid extra-grid">
         <section class="card ex-4" aria-label="Active timesheets">
-          <h3 class="card-title">Active Timesheets</h3>
+          <div class="card-title-row">
+            <span class="card-icon-badge tint-indigo"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 9.5h17" stroke-linecap="round"/></svg></span>
+            <h3 class="card-title">Active Timesheets</h3>
+          </div>
           <p class="card-subtext">You have 1 active timesheet that needs updating.</p>
           <div class="request-row">
             <div class="request-icon request-icon--indigo">
@@ -252,10 +258,27 @@
             <div class="request-info"><h4>Mon, 20 Jul – Sun, 26 Jul</h4></div>
             <button class="btn-b ex-update-btn">Update</button>
           </div>
+          <div class="request-row">
+            <div class="request-icon request-icon--teal">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11.5 12 4l8 7.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 10.5V19a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1v-8.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="request-info"><h4>Mon, 13 Jul – Sun, 19 Jul</h4></div>
+            <span class="status-badge status-badge--approved">Submitted</span>
+          </div>
+          <div class="request-row">
+            <div class="request-icon request-icon--teal">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11.5 12 4l8 7.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 10.5V19a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1v-8.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="request-info"><h4>Mon, 06 Jul – Sun, 12 Jul</h4></div>
+            <span class="status-badge status-badge--approved">Approved</span>
+          </div>
         </section>
 
         <section class="card ex-4" aria-label="Active checklists">
-          <h3 class="card-title">Active Checklists</h3>
+          <div class="card-title-row">
+            <span class="card-icon-badge tint-teal"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12.5 9.5 17 19 6.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <h3 class="card-title">Active Checklists</h3>
+          </div>
           <p class="card-subtext">You have 1 active checklist that needs completing.</p>
           <div class="request-row">
             <div class="request-icon request-icon--teal">
@@ -264,11 +287,28 @@
             <div class="request-info"><h4>New Hire Equipment Checklist</h4></div>
             <button class="btn-b ex-update-btn">Update</button>
           </div>
+          <div class="request-row">
+            <div class="request-icon request-icon--amber">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M3.5 9.5h17" stroke="currentColor" stroke-width="1.6"/></svg>
+            </div>
+            <div class="request-info"><h4>Annual Compliance Acknowledgement</h4></div>
+            <button class="btn-b ex-update-btn">Update</button>
+          </div>
+          <div class="request-row">
+            <div class="request-icon request-icon--teal">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11.5 12 4l8 7.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 10.5V19a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1v-8.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="request-info"><h4>Security Awareness Refresher</h4></div>
+            <span class="status-badge status-badge--approved">Completed</span>
+          </div>
         </section>
 
         <section class="card ex-4" aria-label="Calendar">
           <div class="calendar-header-row">
-            <h3 class="card-title" id="calMonthLabel">Calendar</h3>
+            <div class="card-title-row">
+              <span class="card-icon-badge tint-amber"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 9.5h17M8 3v3.5M16 3v3.5" stroke-linecap="round"/></svg></span>
+              <h3 class="card-title" id="calMonthLabel">Calendar</h3>
+            </div>
             <div class="calendar-nav">
               <button type="button" id="calPrev" class="btn-b cal-nav-btn" aria-label="Previous month">‹</button>
               <button type="button" id="calToday" class="btn-b cal-nav-btn">today</button>
@@ -287,8 +327,11 @@
 
       <!-- REPORTING / REVIEWS / JOB PORTAL ROW -->
       <div class="grid extra-grid">
-        <section class="card ex-4" aria-label="You report to">
-          <h3 class="card-title">You Report To</h3>
+        <section class="card ex-4 report-to-card" aria-label="You report to">
+          <div class="card-title-row">
+            <span class="card-icon-badge tint-teal"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="9" cy="8.5" r="3"/><path d="M3.5 19c0-3 2.5-5 5.5-5s5.5 2 5.5 5" stroke-linecap="round"/><circle cx="17" cy="9" r="2.3"/><path d="M15.2 13.6c2.4.2 4.3 1.9 4.3 4.4" stroke-linecap="round"/></svg></span>
+            <h3 class="card-title">You Report To</h3>
+          </div>
           <div class="report-to-row">
             <div class="directory-avatar report-to-avatar">SJ</div>
             <div class="directory-info">
@@ -297,30 +340,59 @@
             </div>
           </div>
           <a href="mailto:sameer.joshi@teamdesk.example" class="side-help-link report-to-email">sameer.joshi@teamdesk.example</a>
+          <div class="report-to-meta">
+            <div class="report-to-meta-row"><span>Department</span><span>Engineering</span></div>
+            <div class="report-to-meta-row"><span>Location</span><span>Pune Office</span></div>
+            <div class="report-to-meta-row"><span>Team size</span><span>8 members</span></div>
+          </div>
+          <button type="button" class="report-to-msg-btn">Send a message</button>
         </section>
 
         <section class="card ex-4" aria-label="Recent reviews">
-          <h3 class="card-title">Recent Reviews</h3>
-          <div class="info-list">
-            <div class="info-row">
-              <div><h4>Mid-Year Review</h4><p>25 Jul 2026</p></div>
-              <span class="status-badge status-badge--approved">Completed</span>
-            </div>
-            <div class="info-row">
-              <div><h4>Peer Evaluation</h4><p>02 May 2026</p></div>
-              <span class="status-badge status-badge--approved">Completed</span>
-            </div>
-            <div class="info-row">
-              <div><h4>Annual Review</h4><p>30 Nov 2026</p></div>
-              <span class="status-badge status-badge--pending">Planned</span>
-            </div>
+          <div class="card-title-row">
+            <span class="card-icon-badge tint-amber"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3.5l2.6 5.6 6 .7-4.4 4.1 1.2 6-5.4-3-5.4 3 1.2-6L3 9.8l6-.7Z" stroke-linejoin="round"/></svg></span>
+            <h3 class="card-title">Recent Reviews</h3>
+          </div>
+          <div class="data-table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr><th>Type</th><th>Description</th><th>Review Date</th><th>Status</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="dt-primary">Mid-Year Review</td>
+                  <td class="dt-muted">Performance &amp; goals check-in with manager</td>
+                  <td>25 Jul 2026</td>
+                  <td><span class="status-badge status-badge--approved">Completed</span></td>
+                </tr>
+                <tr>
+                  <td class="dt-primary">Peer Evaluation</td>
+                  <td class="dt-muted">360° feedback from project teammates</td>
+                  <td>02 May 2026</td>
+                  <td><span class="status-badge status-badge--approved">Completed</span></td>
+                </tr>
+                <tr>
+                  <td class="dt-primary">Annual Review</td>
+                  <td class="dt-muted">Full-year performance assessment</td>
+                  <td>30 Nov 2026</td>
+                  <td><span class="status-badge status-badge--pending">Planned</span></td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </section>
 
-        <section class="card ex-4" aria-label="Job portal">
-          <h3 class="card-title">Job Portal</h3>
+        <section class="card ex-4 job-portal-card" aria-label="Job portal">
+          <div class="card-title-row">
+            <span class="card-icon-badge tint-indigo"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3.5" y="8" width="17" height="11" rx="2"/><path d="M8.5 8V6.5a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2V8" stroke-linecap="round"/><path d="M3.5 13h17"/></svg></span>
+            <h3 class="card-title">Job Portal</h3>
+          </div>
           <p class="card-subtext">Your company jobs portal is at:</p>
           <a href="#" target="_blank" rel="noopener" class="side-help-link">teamdesk.hrpartner.io/jobs →</a>
+          <div class="job-portal-openings">
+            <div class="job-opening-row"><h5>Frontend Engineer II</h5><span>Pune</span></div>
+            <div class="job-opening-row"><h5>People Ops Associate</h5><span>Bengaluru</span></div>
+          </div>
           <p class="card-subtext job-portal-note">There are currently 4 jobs listed on the portal.</p>
         </section>
       </div>
@@ -328,32 +400,76 @@
       <!-- TRAINING / ASSETS ROW -->
       <div class="grid extra-grid">
         <section class="card ex-6" aria-label="Recent training">
-          <h3 class="card-title">Recent Training</h3>
-          <div class="info-list">
-            <div class="info-row">
-              <div><h4>Workplace Security Basics</h4><p>Started 10 Jun 2026</p></div>
-              <span class="status-badge status-badge--approved">Completed</span>
-            </div>
-            <div class="info-row">
-              <div><h4>React Fundamentals</h4><p>Started 02 Jul 2026</p></div>
-              <span class="status-badge status-badge--pending">Pending</span>
-            </div>
-            <div class="info-row">
-              <div><h4>First Aid (Basic)</h4><p>Started 15 Jan 2026</p></div>
-              <span class="status-badge status-badge--approved">Completed</span>
-            </div>
+          <div class="card-title-row">
+            <span class="card-icon-badge tint-teal"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5 3 9l9 4 9-4-9-4Z" stroke-linejoin="round"/><path d="M7 11v4.5c0 1.4 2.2 2.5 5 2.5s5-1.1 5-2.5V11" stroke-linecap="round"/></svg></span>
+            <h3 class="card-title">Recent Training</h3>
+          </div>
+          <div class="data-table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr><th>Type</th><th>Course Name</th><th>Date Started</th><th>Status</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Security</td>
+                  <td class="dt-primary">Workplace Security Basics</td>
+                  <td>10 Jun 2026</td>
+                  <td><span class="status-badge status-badge--approved">Completed</span></td>
+                </tr>
+                <tr>
+                  <td>Technical</td>
+                  <td class="dt-primary">React Fundamentals</td>
+                  <td>02 Jul 2026</td>
+                  <td><span class="status-badge status-badge--pending">Pending</span></td>
+                </tr>
+                <tr>
+                  <td>Safety</td>
+                  <td class="dt-primary">First Aid (Basic)</td>
+                  <td>15 Jan 2026</td>
+                  <td><span class="status-badge status-badge--approved">Completed</span></td>
+                </tr>
+                <tr>
+                  <td>Compliance</td>
+                  <td class="dt-primary">Data Privacy Essentials</td>
+                  <td>20 Jul 2026</td>
+                  <td><span class="status-badge status-badge--pending">Pending</span></td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </section>
 
         <section class="card ex-6" aria-label="Assets in your care">
-          <h3 class="card-title">Assets in Your Care</h3>
-          <div class="info-list">
-            <div class="info-row">
-              <div><h4>Dell Latitude Laptop</h4><p>AST-2291 · Issued 05 Jan 2025</p></div>
-            </div>
-            <div class="info-row">
-              <div><h4>Building Access Card</h4><p>AST-0187 · Issued 14 Jan 2025</p></div>
-            </div>
+          <div class="card-title-row">
+            <span class="card-icon-badge tint-rose"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="5" width="16" height="10" rx="1.5"/><path d="M2.5 19h19" stroke-linecap="round"/></svg></span>
+            <h3 class="card-title">Assets in Your Care</h3>
+          </div>
+          <div class="data-table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr><th>Asset ID</th><th>Description</th><th>Date Out</th><th>Due Back</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="dt-primary">AST-2291</td>
+                  <td>Dell Latitude Laptop</td>
+                  <td>05 Jan 2025</td>
+                  <td>On separation</td>
+                </tr>
+                <tr>
+                  <td class="dt-primary">AST-0187</td>
+                  <td>Building Access Card</td>
+                  <td>14 Jan 2025</td>
+                  <td>On separation</td>
+                </tr>
+                <tr>
+                  <td class="dt-primary">AST-3305</td>
+                  <td>Wireless Headset</td>
+                  <td>10 Mar 2026</td>
+                  <td>On separation</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </section>
       </div>
@@ -361,12 +477,24 @@
       <!-- POSITION HISTORY -->
       <div class="grid extra-grid">
         <section class="card ex-12" aria-label="Position history">
-          <h3 class="card-title">Your Position History</h3>
-          <div class="info-list">
-            <div class="info-row">
-              <div><h4>Frontend Developer Intern</h4><p>Commenced 01 Jan 2026</p></div>
-              <span class="status-badge status-badge--approved">Current</span>
-            </div>
+          <div class="card-title-row">
+            <span class="card-icon-badge tint-indigo"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 3.5v17" stroke-linecap="round"/><path d="M6 4.5h11l-2.5 3.5 2.5 3.5H6" stroke-linejoin="round"/></svg></span>
+            <h3 class="card-title">Your Position History</h3>
+          </div>
+          <div class="data-table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr><th>Position</th><th>Commenced</th><th>Completed</th><th>Remuneration</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="dt-primary">Frontend Developer Intern</td>
+                  <td>01 Jan 2026</td>
+                  <td><span class="status-badge status-badge--approved">Current</span></td>
+                  <td>₹25,000/mo</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </section>
       </div>
@@ -375,7 +503,10 @@
 
         <!-- CONTAINER 2 — Text block / summary -->
         <section class="card c2" aria-label="Today at a glance">
-          <h3 class="card-title">Today at a glance</h3>
+          <div class="card-title-row">
+            <span class="card-icon-badge tint-rose"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3.5 13.6 9l5.4 1.6-5.4 1.6L12 18l-1.6-5.8L5 10.6 10.4 9Z" stroke-linejoin="round"/></svg></span>
+            <h3 class="card-title">Today at a glance</h3>
+          </div>
           <ul class="summary-list">
             <li><span class="dot dot--indigo"></span> 3 requests awaiting your approval</li>
             <li><span class="dot dot--teal"></span> 1 document expires this week</li>
@@ -388,7 +519,10 @@
         <!-- CONTAINER 3 — Manual slider with prev/next arrows -->
         <section class="card c3" aria-label="Company updates slider">
           <div class="card-header-row">
-            <h3 class="card-title">Company updates</h3>
+            <div class="card-title-row">
+              <span class="card-icon-badge tint-indigo"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 10.5v3a1 1 0 0 0 1 1h1.5l2 4.5h2l-1.5-4.5H11l7 3v-11l-7 3H6.5A1 1 0 0 0 4 10.5Z" stroke-linejoin="round"/></svg></span>
+              <h3 class="card-title">Company updates</h3>
+            </div>
             <div class="arrow-controls">
               <button class="arrow-btn" id="prevBtn" aria-label="Previous update">‹</button>
               <button class="arrow-btn" id="nextBtn" aria-label="Next update">›</button>
@@ -423,7 +557,10 @@
 
         <!-- CONTAINER 4 — Static content card -->
         <section class="card c4" aria-label="Upcoming holidays">
-          <h3 class="card-title">Upcoming holidays</h3>
+          <div class="card-title-row">
+            <span class="card-icon-badge tint-amber"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="4"/><path d="M12 3v2.5M12 18.5V21M4.2 4.2l1.8 1.8M18 18l1.8 1.8M3 12h2.5M18.5 12H21M4.2 19.8 6 18M18 6l1.8-1.8" stroke-linecap="round"/></svg></span>
+            <h3 class="card-title">Upcoming holidays</h3>
+          </div>
           <div class="holiday-row" data-date="2026-08-15">
             <div class="holiday-date">
               <span class="holiday-day">15</span>
@@ -458,7 +595,10 @@
 
         <!-- CONTAINER 5 — Two buttons -->
         <section class="card c5" aria-label="Quick actions">
-          <h3 class="card-title">Quick actions</h3>
+          <div class="card-title-row">
+            <span class="card-icon-badge tint-teal"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M13 3 6 13.5h5L11 21l7-10.5h-5Z" stroke-linejoin="round"/></svg></span>
+            <h3 class="card-title">Quick actions</h3>
+          </div>
           <p class="card-subtext">Common requests, handled in a couple of taps.</p>
           <div class="action-buttons">
             <button class="btn btn-a" id="btnA">Apply for Leave</button>
@@ -531,7 +671,10 @@
 
         <!-- CONTAINER 6 — Auto-rotating spotlight (fade animation) -->
         <section class="card c6" aria-label="Team spotlight">
-          <h3 class="card-title">Team spotlight</h3>
+          <div class="card-title-row">
+            <span class="card-icon-badge tint-rose"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M7 8.5c-2 0-3.5 1.6-3.5 3.7v3.3h3.7v-3.3H5.4c0-1 .6-1.7 1.6-1.7Z"/><path d="M15.5 8.5c-2 0-3.5 1.6-3.5 3.7v3.3h3.7v-3.3h-1.8c0-1 .6-1.7 1.6-1.7Z"/></svg></span>
+            <h3 class="card-title">Team spotlight</h3>
+          </div>
           <div class="spotlight" id="spotlight">
             <div class="spotlight-slide is-active">
               <div class="spotlight-avatar">RS</div>

@@ -10,6 +10,7 @@
   --amber: #D97F06;
   --amber-light: #FDF1DF;
   --rose: #C2417A;
+  --rose-light: #FBE8F0;
 
   --ink: #1A1B23;
   --slate: #63667A;
@@ -1335,13 +1336,98 @@ margin-top:15px;
 .shortcut-item .request-info { flex: none; }
 .shortcut-item .request-info h4 { margin-bottom: 0; font-size: 13.5px; }
 
-/* ---- Small update / nav buttons reusing .btn-b look ---- */
-.ex-update-btn {
-  padding: 8px 14px;
-  font-size: 12.5px;
-  border-radius: 8px;
+/* ---- Card heading icon badges (light tint fill) ---- */
+.card-title-row { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+.card-title-row .card-title { margin-bottom: 0; }
+.card-header-row .card-title-row,
+.calendar-header-row .card-title-row { margin-bottom: 0; }
+.card-icon-badge {
+  width: 34px; height: 34px;
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
   flex-shrink: 0;
 }
+.card-icon-badge svg { width: 17px; height: 17px; }
+.card-icon-badge.tint-indigo { background: var(--indigo-light); color: var(--indigo); }
+.card-icon-badge.tint-teal { background: var(--teal-light); color: var(--teal); }
+.card-icon-badge.tint-amber { background: var(--amber-light); color: var(--amber); }
+.card-icon-badge.tint-rose { background: var(--rose-light); color: var(--rose); }
+
+/* ---- Attractive data tables (Training / Reviews / Assets / Position History) ---- */
+.data-table-wrap { overflow-x: auto; }
+.data-table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+.data-table th, .data-table td {
+  padding: 12px 14px;
+  font-size: 13.5px;
+  text-align: left;
+  white-space: normal;
+  overflow-wrap: break-word;
+}
+.data-table th {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--slate-light);
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+}
+.data-table th:first-child { border-radius: 10px 0 0 0; }
+.data-table th:last-child { border-radius: 0 10px 0 0; }
+.data-table td { border-bottom: 1px solid var(--border); color: var(--ink); }
+.data-table tr:last-child td { border-bottom: none; }
+.data-table tbody tr { transition: background .15s ease; }
+.data-table tbody tr:hover { background: var(--indigo-light); }
+.data-table td.dt-primary { font-weight: 700; }
+.data-table td.dt-muted { color: var(--slate); white-space: normal; }
+
+/* ---- Purple "Update" buttons ---- */
+.ex-update-btn {
+  background: var(--indigo);
+  color: #fff;
+  border: none;
+  box-shadow: 0 6px 14px rgba(55,48,163,0.22);
+}
+.ex-update-btn:hover { background: #2d2882; }
+
+/* ---- You Report To / Job Portal — fill available height ---- */
+.report-to-card, .job-portal-card { display: flex; flex-direction: column; height: 100%; }
+.report-to-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+}
+.report-to-meta-row { display: flex; justify-content: space-between; font-size: 13px; }
+.report-to-meta-row span:first-child { color: var(--slate-light); }
+.report-to-meta-row span:last-child { font-weight: 600; color: var(--ink); }
+.report-to-msg-btn {
+  margin-top: 14px;
+  align-self: flex-start;
+  padding: 9px 16px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  background: var(--indigo-light);
+  color: var(--indigo);
+  transition: background .15s ease;
+}
+.report-to-msg-btn:hover { background: var(--indigo); color: #fff; }
+
+.job-portal-openings { margin-top: 14px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+.job-opening-row {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font-size: 13px;
+}
+.job-opening-row h5 { font-size: 13px; font-weight: 700; margin: 0; }
+.job-opening-row span { font-size: 11.5px; color: var(--slate-light); }
+.job-portal-note { margin-top: auto; padding-top: 12px; }
+
 .calendar-header-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
 .calendar-header-row .card-title { margin-bottom: 0; }
 .calendar-nav { display: flex; gap: 6px; }
