@@ -54,7 +54,7 @@ open index.html          # macOS
 start index.html         # Windows
 
 # Option 2: serve it (recommended, avoids any file:// quirks)
-python3 -m http.server 8000
+python -m http.server 8000
 # then visit http://localhost:8000
 ```
 

@@ -3,13 +3,14 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Documents — TeamDesk</title>
+<title>Forms — TeamDesk</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css?v=3" />
 </head>
 <body>
 
+  <!-- HEADER -->
   <header class="site-header">
     <button class="hamburger" id="hamburgerBtn" aria-label="Toggle menu" aria-expanded="true">
       <span></span><span></span><span></span>
@@ -28,6 +29,8 @@
   </header>
 
   <div class="shell">
+
+    <!-- SIDEBAR -->
     <aside class="sidebar" id="sidebar">
       <div class="sidebar-scroll">
         <div class="sidebar-profile">
@@ -45,7 +48,7 @@
           <span class="side-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8.5" r="3.4" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M5 19.5c0-3.6 3.1-6 7-6s7 2.4 7 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
           <span class="side-link-label">My Profile</span>
       </a>
-      <a href="documents.html" class="side-link active">
+      <a href="documents.html" class="side-link">
           <span class="side-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8.5A2.5 2.5 0 0 1 6.5 6h3.6l1.6 2h5.8A2.5 2.5 0 0 1 20 10.5v6A2.5 2.5 0 0 1 17.5 19h-11A2.5 2.5 0 0 1 4 16.5z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></span>
           <span class="side-link-label">My Documents</span>
       </a>
@@ -65,13 +68,13 @@
       <a href="checklists.html" class="side-link">
           <span class="side-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5 9.5 17 19 6.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
           <span class="side-link-label">Checklists</span>
-          <span class="nav-badge">1</span>
+          <span class="nav-badge">2</span>
       </a>
       <a href="expenses.html" class="side-link">
           <span class="side-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="6.5" width="17" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M3.5 10h17" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="16.5" cy="14" r="1.3" fill="currentColor"/></svg></span>
           <span class="side-link-label">Expenses</span>
       </a>
-      <a href="forms.html" class="side-link">
+      <a href="forms.html" class="side-link active">
           <span class="side-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v1.3a1.7 1.7 0 0 0 0 3.4V15a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-1.3a1.7 1.7 0 0 0 0-3.4z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></span>
           <span class="side-link-label">Forms</span>
       </a>
@@ -98,105 +101,175 @@
         <a href="mailto:it-support@teamdesk.example" class="side-help-link">Contact IT Support →</a>
       </div>
     </aside>
+
     <div class="backdrop" id="backdrop"></div>
 
+    <!-- MAIN CONTENT -->
     <main class="main">
-      <div class="page-heading">
-        <h1>Documents</h1>
+
+      <div class="page-heading page-heading--row">
+        <div>
+          <h1>Forms</h1>
+        </div>
+        <button type="button" class="btn-new-request" id="newFormRequestBtn">+ Request a Form</button>
       </div>
 
       <div class="page-card">
-        <input type="search" class="search-input" id="docSearch" placeholder="Search documents…" />
+        <input type="search" class="search-input" id="docSearch" placeholder="Search forms by name…">
         <div class="search-meta-row">
-          <span class="search-results-count" id="docResultsCount">6 documents</span>
+          <span class="search-results-count" id="docResultsCount">9 forms</span>
         </div>
       </div>
 
+      <p class="forms-section-title">HR Forms</p>
       <div class="doc-grid" id="docGrid">
-        <div class="doc-card" data-name="payslip july 2026">
+        <div class="doc-card" data-name="leave application form">
           <div class="doc-icon doc-icon--indigo">
-            <svg class="doc-icon-svg" viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M8 3.5h6l4 4V20a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1V4.5a1 1 0 0 1 1-1Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
-              <path d="M14 3.5V8h4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
-              <path d="M9.5 11.5h5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-              <path d="M9.5 15h5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-              <path d="M9.5 18.5h3.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-              <path d="M11.8 10.4c.9 0 1.6.7 1.6 1.6s-.7 1.6-1.6 1.6-1.6-.7-1.6-1.6.7-1.6 1.6-1.6Z" fill="currentColor"/>
-            </svg>
+            <svg class="doc-icon-svg" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 9.5h17M8 3v3.5M16 3v3.5" stroke-linecap="round"/></svg>
           </div>
-          <h4>Payslip — July 2026</h4>
-          <p>Generated 1 Aug 2026</p>
+          <div class="doc-card-row">
+            <h4>Leave Application Form</h4>
+            <span class="doc-badge">PDF</span>
+          </div>
+          <p>Formal request for annual, sick, or unplanned leave.</p>
           <button class="doc-download">Download</button>
         </div>
-        <div class="doc-card" data-name="offer letter">
+
+        <div class="doc-card" data-name="employee referral form">
           <div class="doc-icon doc-icon--teal">
-            <svg class="doc-icon-svg" viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M8 3.5h6l4 4V20a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1V4.5a1 1 0 0 1 1-1Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
-              <path d="M14 3.5V8h4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
-              <path d="M9 12.5h6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-              <path d="M9 15.5h6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-              <path d="m9.3 18.7 1.4-1.4 1.2 1.2 2.1-2.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
+            <svg class="doc-icon-svg" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="9" cy="8.5" r="3"/><path d="M3.5 19c0-3 2.5-5 5.5-5s5.5 2 5.5 5"/><circle cx="17" cy="9" r="2.3"/><path d="M15.2 13.6c2.4.2 4.3 1.9 4.3 4.4"/></svg>
           </div>
-          <h4>Offer Letter</h4>
-          <p>Signed 14 Jan 2025</p>
+          <div class="doc-card-row">
+            <h4>Employee Referral Form</h4>
+            <span class="doc-badge">DOCX</span>
+          </div>
+          <p>Refer a candidate and track your referral bonus eligibility.</p>
           <button class="doc-download">Download</button>
         </div>
-        <div class="doc-card" data-name="pf statement provident fund">
+
+        <div class="doc-card" data-name="bank details update form">
           <div class="doc-icon doc-icon--amber">
-            <svg class="doc-icon-svg" viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M4 10.5 12 5l8 5.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M5.5 10.5v8M9.5 10.5v8M14.5 10.5v8M18.5 10.5v8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-              <path d="M4 18.5h16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-              <path d="M4 21.5h16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-            </svg>
+            <svg class="doc-icon-svg" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3.5" y="6.5" width="17" height="12" rx="2"/><path d="M3.5 10h17"/><circle cx="16.5" cy="14" r="1.3" fill="currentColor"/></svg>
           </div>
-          <h4>PF Statement</h4>
-          <p>FY 2025–26</p>
-          <button class="doc-download">Download</button>
-        </div>
-        <div class="doc-card" data-name="it declaration tax">
-          <div class="doc-icon doc-icon--rose">
-            <svg class="doc-icon-svg" viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M8 3.5h6l4 4V20a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1V4.5a1 1 0 0 1 1-1Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
-              <path d="M14 3.5V8h4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
-              <path d="M9.5 11.5h5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-              <path d="M9.5 15h5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-              <path d="M9.5 18.5h3.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-              <path d="M12 9.5 14 7.5 16 9.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
+          <div class="doc-card-row">
+            <h4>Bank Details Update Form</h4>
+            <span class="doc-badge">PDF</span>
           </div>
-          <h4>IT Declaration Form</h4>
-          <p>Due 31 Jul 2026</p>
-          <button class="doc-download">Download</button>
-        </div>
-        <div class="doc-card" data-name="company policy handbook">
-          <div class="doc-icon doc-icon--indigo">
-            <svg class="doc-icon-svg" viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M12 6c-1.6-1.2-3.8-1.7-6-1.5v13c2.2-.2 4.4.3 6 1.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M12 6c1.6-1.2 3.8-1.7 6-1.5v13c-2.2-.2-4.4.3-6 1.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M12 6v13" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-            </svg>
-          </div>
-          <h4>Company Policy Handbook</h4>
-          <p>Updated Jun 2026</p>
-          <button class="doc-download">Download</button>
-        </div>
-        <div class="doc-card" data-name="nda copy confidentiality">
-          <div class="doc-icon doc-icon--teal">
-            <svg class="doc-icon-svg" viewBox="0 0 24 24" aria-hidden="true">
-              <rect x="6" y="11" width="12" height="9" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/>
-              <path d="M8.5 11V8a3.5 3.5 0 0 1 7 0v3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-              <circle cx="12" cy="15" r="1.4" fill="currentColor"/>
-              <path d="M12 16.4v1.6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-            </svg>
-          </div>
-          <h4>Signed NDA Copy</h4>
-          <p>Signed 14 Jan 2025</p>
+          <p>Update your salary account details for payroll.</p>
           <button class="doc-download">Download</button>
         </div>
       </div>
-      <p class="empty-state" id="docEmptyState" hidden>No documents match your search.</p>
+
+      <p class="forms-section-title">IT Forms</p>
+      <div class="doc-grid">
+        <div class="doc-card" data-name="new equipment request form">
+          <div class="doc-icon doc-icon--indigo">
+            <svg class="doc-icon-svg" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="5" width="16" height="10" rx="1.5"/><path d="M2.5 19h19" stroke-linecap="round"/></svg>
+          </div>
+          <div class="doc-card-row">
+            <h4>New Equipment Request</h4>
+            <span class="doc-badge">Fillable</span>
+          </div>
+          <p>Request a laptop, monitor, or other hardware.</p>
+          <button class="doc-download">Download</button>
+        </div>
+
+        <div class="doc-card" data-name="software access request form">
+          <div class="doc-icon doc-icon--teal">
+            <svg class="doc-icon-svg" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3.5" y="5" width="17" height="12" rx="2"/><path d="M9 20h6M12 17v3" stroke-linecap="round"/></svg>
+          </div>
+          <div class="doc-card-row">
+            <h4>Software Access Request</h4>
+            <span class="doc-badge">Fillable</span>
+          </div>
+          <p>Request access or a licence seat for a company tool.</p>
+          <button class="doc-download">Download</button>
+        </div>
+
+        <div class="doc-card" data-name="vpn setup guide and form">
+          <div class="doc-icon doc-icon--rose">
+            <svg class="doc-icon-svg" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="8.5"/><path d="M8 12h8M12 8v8" stroke-linecap="round"/></svg>
+          </div>
+          <div class="doc-card-row">
+            <h4>VPN Setup Guide &amp; Form</h4>
+            <span class="doc-badge">PDF</span>
+          </div>
+          <p>Steps and access form for remote VPN connectivity.</p>
+          <button class="doc-download">Download</button>
+        </div>
+      </div>
+
+      <p class="forms-section-title">Finance &amp; Admin Forms</p>
+      <div class="doc-grid">
+        <div class="doc-card" data-name="travel advance request form">
+          <div class="doc-icon doc-icon--amber">
+            <svg class="doc-icon-svg" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 16.5 9 8l3 2 3-5 5 11.5Z" stroke-linejoin="round"/><path d="M4 16.5h16" stroke-linecap="round"/></svg>
+          </div>
+          <div class="doc-card-row">
+            <h4>Travel Advance Request</h4>
+            <span class="doc-badge">PDF</span>
+          </div>
+          <p>Request an advance before business travel.</p>
+          <button class="doc-download">Download</button>
+        </div>
+
+        <div class="doc-card" data-name="vendor onboarding form">
+          <div class="doc-icon doc-icon--indigo">
+            <svg class="doc-icon-svg" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3.5" y="8" width="17" height="11" rx="2"/><path d="M8.5 8V6.5a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2V8"/><path d="M3.5 13h17"/></svg>
+          </div>
+          <div class="doc-card-row">
+            <h4>Vendor Onboarding Form</h4>
+            <span class="doc-badge">DOCX</span>
+          </div>
+          <p>Onboard a new vendor for procurement &amp; billing.</p>
+          <button class="doc-download">Download</button>
+        </div>
+
+        <div class="doc-card" data-name="ID card replacement form">
+          <div class="doc-icon doc-icon--teal">
+            <svg class="doc-icon-svg" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3.5" y="5.5" width="17" height="13" rx="2"/><circle cx="8.5" cy="11" r="2"/><path d="M13.5 10h5M13.5 13.5h5" stroke-linecap="round"/></svg>
+          </div>
+          <div class="doc-card-row">
+            <h4>ID Card Replacement Form</h4>
+            <span class="doc-badge">PDF</span>
+          </div>
+          <p>Request a replacement for a lost or damaged ID card.</p>
+          <button class="doc-download">Download</button>
+        </div>
+      </div>
+
+      <p class="empty-state" id="docEmptyState" hidden>No forms match your search.</p>
+
+      <!-- REQUEST A CUSTOM FORM MODAL -->
+      <div class="request-modal" id="formRequestModal">
+        <div class="request-modal-card">
+          <div class="modal-header">
+            <h2>Request a Form</h2>
+            <button class="close-modal" id="formRequestCloseModal" type="button">&times;</button>
+          </div>
+
+          <form class="request-form" id="formRequestForm">
+            <label for="formRequestType">Which form do you need?</label>
+            <select id="formRequestType" required>
+              <option value="">Select a form</option>
+              <option>Experience / Relieving Letter</option>
+              <option>Salary Certificate</option>
+              <option>NOC (No Objection Certificate)</option>
+              <option>Address Proof Letter</option>
+              <option>Something else</option>
+            </select>
+
+            <label for="formRequestNote">Any additional details</label>
+            <textarea id="formRequestNote" rows="3" placeholder="Optional — add context for HR"></textarea>
+
+            <div class="modal-buttons">
+              <button type="submit" class="btn btn-a">Send Request</button>
+              <button type="button" class="btn btn-b" id="formRequestCancelModal">Cancel</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
     </main>
   </div>
 

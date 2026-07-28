@@ -92,6 +92,15 @@ document.addEventListener('DOMContentLoaded', () => {
       applySidebarState(collapsed);
     });
 
+    document.querySelectorAll('.side-link').forEach((link) => {
+      link.addEventListener('click', () => {
+        if (!isMobile()) return;
+        collapsed = true;
+        localStorage.setItem(SIDEBAR_KEY, 'true');
+        applySidebarState(collapsed);
+      });
+    });
+
     backdrop.addEventListener('click', () => {
       collapsed = true;
       localStorage.setItem(SIDEBAR_KEY, 'true');
@@ -453,31 +462,43 @@ document.addEventListener('DOMContentLoaded', () => {
      DOCUMENTS PAGE — search filter + download feedback
      ========================================================== */
   const docSearch = document.getElementById('docSearch');
-  const docGrid = document.getElementById('docGrid');
+  const docGrid = document.getElementById('docGrid') || document.querySelector('.doc-grid');
   const docEmptyState = document.getElementById('docEmptyState');
   const docResultsCount = document.getElementById('docResultsCount');
+  const docNounLabel = document.body.contains(document.getElementById('newFormRequestBtn')) ? 'forms' : 'documents';
   if (docSearch && docGrid) {
-    const totalDocs = docGrid.querySelectorAll('.doc-card').length;
+    const allDocCards = () => document.querySelectorAll('.doc-card');
+    const allDocGrids = () => document.querySelectorAll('.doc-grid');
+    const totalDocs = allDocCards().length;
     let docDebounce;
     docSearch.addEventListener('input', () => {
       clearTimeout(docDebounce);
       docDebounce = setTimeout(() => {
         const q = docSearch.value.trim().toLowerCase();
         let visibleCount = 0;
-        docGrid.querySelectorAll('.doc-card').forEach(card => {
+        allDocCards().forEach(card => {
           const match = card.dataset.name.includes(q);
           card.style.display = match ? '' : 'none';
           if (match) visibleCount++;
         });
+        // Hide a whole section title if every card in that grid is filtered out.
+        allDocGrids().forEach(grid => {
+          const anyVisible = Array.from(grid.querySelectorAll('.doc-card')).some(c => c.style.display !== 'none');
+          const heading = grid.previousElementSibling;
+          if (heading && heading.classList && heading.classList.contains('forms-section-title')) {
+            heading.style.display = anyVisible ? '' : 'none';
+          }
+          grid.style.display = anyVisible ? '' : 'none';
+        });
         if (docEmptyState) docEmptyState.hidden = visibleCount !== 0;
         if (docResultsCount) {
           docResultsCount.textContent = q
-            ? `${visibleCount} of ${totalDocs} documents`
-            : `${totalDocs} documents`;
+            ? `${visibleCount} of ${totalDocs} ${docNounLabel}`
+            : `${totalDocs} ${docNounLabel}`;
         }
       }, 180);
     });
-    docGrid.querySelectorAll('.doc-download').forEach(btn => {
+    document.querySelectorAll('.doc-download').forEach(btn => {
       btn.addEventListener('click', () => {
         const card = btn.closest('.doc-card');
         const docName = card?.querySelector('h4')?.textContent || 'Document';
@@ -770,6 +791,244 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     renderCalendar();
+  }
+
+  /* ==========================================================
+     TIMESHEETS PAGE — live total, week nav, submit for approval
+     ========================================================== */
+  const timesheetTable = document.getElementById('timesheetTable');
+  const tsTotalCell = document.getElementById('tsTotalHours');
+  const timesheetForm = document.getElementById('timesheetForm');
+  const tsHistoryBody = document.getElementById('tsHistoryBody');
+  const tsWeekLabel = document.getElementById('tsWeekLabel');
+  const tsSaveDraftBtn = document.getElementById('tsSaveDraft');
+
+  if (timesheetTable && tsTotalCell) {
+    const hourInputs = () => Array.from(timesheetTable.querySelectorAll('input[type="number"]'));
+
+    const tsStatThisWeek = document.getElementById('statThisWeek');
+    function recalcTimesheetTotal() {
+      const total = hourInputs().reduce((sum, input) => sum + (parseFloat(input.value) || 0), 0);
+      tsTotalCell.textContent = total.toFixed(1) + ' hrs';
+      if (tsStatThisWeek) tsStatThisWeek.textContent = total.toFixed(1) + ' hrs';
+    }
+    hourInputs().forEach(input => input.addEventListener('input', recalcTimesheetTotal));
+    recalcTimesheetTotal();
+
+    if (tsSaveDraftBtn) {
+      tsSaveDraftBtn.addEventListener('click', () => {
+        showToast('Timesheet saved as draft.');
+      });
+    }
+
+    if (timesheetForm) {
+      timesheetForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const total = hourInputs().reduce((sum, input) => sum + (parseFloat(input.value) || 0), 0);
+        if (total <= 0) {
+          showToast('Add at least a few hours before submitting.', 'error');
+          return;
+        }
+        const weekLabel = tsWeekLabel ? tsWeekLabel.textContent : 'This week';
+
+        if (tsHistoryBody) {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td class="dt-primary">${weekLabel}</td>
+            <td>${total.toFixed(1)} hrs</td>
+            <td>${new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}</td>
+            <td><span class="status-badge status-badge--pending">Pending</span></td>
+          `;
+          tsHistoryBody.prepend(row);
+        }
+        showToast(`Timesheet for ${weekLabel} submitted — awaiting manager approval.`);
+        bumpPendingBadge(1);
+      });
+    }
+  }
+
+  /* ==========================================================
+     CHECKLISTS PAGE — check off items, live progress bars
+     ========================================================== */
+  document.querySelectorAll('.checklist-card').forEach(card => {
+    const items = Array.from(card.querySelectorAll('.checklist-item'));
+    const fill = card.querySelector('.progress-fill');
+    const metaDone = card.querySelector('.progress-meta-done');
+    const badge = card.querySelector('.checklist-status-badge');
+    if (!items.length) return;
+
+    function updateProgress() {
+      const doneCount = items.filter(i => i.classList.contains('is-done')).length;
+      const pct = Math.round((doneCount / items.length) * 100);
+      if (fill) {
+        fill.style.width = pct + '%';
+        fill.classList.toggle('is-complete', pct === 100);
+      }
+      if (metaDone) metaDone.textContent = `${doneCount} of ${items.length} complete`;
+      if (badge) {
+        if (pct === 100) {
+          badge.textContent = 'Completed';
+          badge.className = 'status-badge status-badge--approved checklist-status-badge';
+        } else if (doneCount === 0) {
+          badge.textContent = 'Not started';
+          badge.className = 'status-badge status-badge--pending checklist-status-badge';
+        } else {
+          badge.textContent = 'In progress';
+          badge.className = 'status-badge status-badge--pending checklist-status-badge';
+        }
+      }
+    }
+
+    items.forEach(item => {
+      item.addEventListener('click', () => {
+        const wasComplete = items.every(i => i.classList.contains('is-done'));
+        item.classList.toggle('is-done');
+        updateProgress();
+        const nowComplete = items.every(i => i.classList.contains('is-done'));
+        if (nowComplete && !wasComplete) {
+          showToast(`"${card.querySelector('h4')?.textContent}" checklist completed 🎉`);
+        }
+      });
+    });
+
+    updateProgress();
+  });
+
+  /* ==========================================================
+     EXPENSES PAGE — filter tabs, new claim modal, live totals
+     ========================================================== */
+  const expenseFilterTabs = document.getElementById('expenseFilterTabs');
+  const expenseList = document.getElementById('expenseList');
+  const expenseEmptyState = document.getElementById('expenseEmptyState');
+
+  if (expenseFilterTabs && expenseList) {
+    expenseFilterTabs.querySelectorAll('.filter-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        expenseFilterTabs.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('is-active'));
+        tab.classList.add('is-active');
+        const filter = tab.dataset.filter;
+        let visibleCount = 0;
+        expenseList.querySelectorAll('.request-row').forEach(row => {
+          const show = filter === 'all' || row.dataset.status === filter;
+          row.style.display = show ? 'flex' : 'none';
+          if (show) visibleCount++;
+        });
+        if (expenseEmptyState) expenseEmptyState.hidden = visibleCount !== 0;
+      });
+    });
+  }
+
+  const newExpenseBtn = document.getElementById('newExpenseBtn');
+  const expenseModal = document.getElementById('expenseModal');
+  const expenseCloseModal = document.getElementById('expenseCloseModal');
+  const expenseCancelModal = document.getElementById('expenseCancelModal');
+  const expenseForm = document.getElementById('expenseForm');
+  const expenseFileInput = document.getElementById('expenseFile');
+  const expenseFileDrop = document.getElementById('expenseFileDrop');
+  const expenseFileName = document.getElementById('expenseFileName');
+
+  if (newExpenseBtn && expenseModal) {
+    newExpenseBtn.addEventListener('click', () => expenseModal.classList.add('show'));
+  }
+  if (expenseCloseModal && expenseModal) {
+    expenseCloseModal.addEventListener('click', () => expenseModal.classList.remove('show'));
+  }
+  if (expenseCancelModal && expenseModal) {
+    expenseCancelModal.addEventListener('click', () => expenseModal.classList.remove('show'));
+  }
+  window.addEventListener('click', (e) => {
+    if (expenseModal && e.target === expenseModal) expenseModal.classList.remove('show');
+  });
+  if (expenseFileDrop && expenseFileInput) {
+    expenseFileDrop.addEventListener('click', () => expenseFileInput.click());
+    expenseFileInput.addEventListener('change', () => {
+      if (expenseFileInput.files.length && expenseFileName) {
+        expenseFileName.textContent = expenseFileInput.files[0].name;
+        expenseFileName.hidden = false;
+      }
+    });
+  }
+
+  if (expenseForm && expenseList) {
+    expenseForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const category = document.getElementById('expenseCategory')?.value || 'Other';
+      const amount = parseFloat(document.getElementById('expenseAmount')?.value) || 0;
+      const date = document.getElementById('expenseDate')?.value;
+      const desc = document.getElementById('expenseDescription')?.value?.trim() || 'No description provided';
+
+      const dateLabel = date
+        ? new Date(date + 'T00:00:00').toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })
+        : 'Date pending';
+
+      const catMap = {
+        'Travel': 'travel', 'Meals & Entertainment': 'meals',
+        'Office Supplies': 'supplies', 'Software & Subscriptions': 'software'
+      };
+      const catKey = catMap[category] || 'travel';
+      const iconSvgMap = {
+        travel: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 16.5 9 8l3 2 3-5 5 11.5Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M4 16.5h16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>',
+        meals: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3.5v7a2.5 2.5 0 0 0 5 0v-7M9.5 10.5V20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M16.5 3.5c-1.4 0-2.5 2-2.5 5s1.1 4.6 2.5 4.6V20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+        supplies: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M8 9h8M8 13h8M8 17h5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>',
+        software: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M9 20h6M12 17v3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>'
+      };
+
+      const row = document.createElement('div');
+      row.className = 'request-row';
+      row.dataset.status = 'pending';
+      row.innerHTML = `
+        <div class="request-icon expense-cat-icon--${catKey}">${iconSvgMap[catKey]}</div>
+        <div class="request-info">
+          <h4>${category}</h4>
+          <p>${dateLabel} · ${desc}</p>
+        </div>
+        <div class="expense-row-meta">
+          <span class="expense-amount">₹${amount.toLocaleString('en-IN')}</span>
+          <span class="status-badge status-badge--pending">Pending</span>
+        </div>
+      `;
+      expenseList.prepend(row);
+      expenseForm.reset();
+      if (expenseFileName) { expenseFileName.hidden = true; expenseFileName.textContent = ''; }
+
+      const activeFilter = expenseFilterTabs?.querySelector('.filter-tab.is-active')?.dataset.filter || 'all';
+      row.style.display = activeFilter === 'all' || activeFilter === 'pending' ? 'flex' : 'none';
+      if (expenseEmptyState) expenseEmptyState.hidden = true;
+
+      expenseModal.classList.remove('show');
+      showToast(`${category} claim for ₹${amount.toLocaleString('en-IN')} submitted for reimbursement.`);
+    });
+  }
+
+  /* ==========================================================
+     FORMS PAGE — request-a-form modal (IT/HR/Finance custom forms)
+     ========================================================== */
+  const newFormBtn = document.getElementById('newFormRequestBtn');
+  const formRequestModal = document.getElementById('formRequestModal');
+  const formRequestClose = document.getElementById('formRequestCloseModal');
+  const formRequestCancel = document.getElementById('formRequestCancelModal');
+  const formRequestForm = document.getElementById('formRequestForm');
+
+  if (newFormBtn && formRequestModal) {
+    newFormBtn.addEventListener('click', () => formRequestModal.classList.add('show'));
+  }
+  if (formRequestClose && formRequestModal) {
+    formRequestClose.addEventListener('click', () => formRequestModal.classList.remove('show'));
+  }
+  if (formRequestCancel && formRequestModal) {
+    formRequestCancel.addEventListener('click', () => formRequestModal.classList.remove('show'));
+  }
+  window.addEventListener('click', (e) => {
+    if (formRequestModal && e.target === formRequestModal) formRequestModal.classList.remove('show');
+  });
+  if (formRequestForm) {
+    formRequestForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const which = document.getElementById('formRequestType')?.value || 'Form';
+      showToast(`Request sent — a custom "${which}" will be emailed to you shortly.`);
+      formRequestForm.reset();
+      formRequestModal.classList.remove('show');
+    });
   }
 
 });

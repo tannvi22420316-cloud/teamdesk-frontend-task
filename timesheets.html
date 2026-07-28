@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Timesheets — TeamDesk</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=3" />
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <button class="hamburger" id="hamburgerBtn" aria-label="Toggle menu" aria-expanded="true">
+      <span></span><span></span><span></span>
+    </button>
+    <a href="index.html" class="brand">
+      <span class="brand-mark">TD</span>
+      <span class="brand-name">TeamDesk</span>
+    </a>
+    <div class="header-right">
+      <span class="header-date" id="headerDate"></span>
+      <div class="avatar">TK</div>
+      <button class="auth-btn" id="authBtn" type="button" aria-pressed="true">
+        <span class="auth-label">Logout</span>
+      </button>
+    </div>
+  </header>
+
+  <div class="shell">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-scroll">
+        <div class="sidebar-profile">
+          <div class="sidebar-profile-photo">
+            <img src="https://i.pravatar.cc/120?img=5" alt="Tannvi Kamble" />
+          </div>
+          <p class="sidebar-profile-name">Tannvi Kamble</p>
+        </div>
+        <nav class="side-nav">
+      <a href="index.html" class="side-link">
+          <span class="side-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11.5 12 4l8 7.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 10.5V19a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1v-8.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M10 20v-4.5h4V20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></span>
+          <span class="side-link-label">Home</span>
+      </a>
+      <a href="settings.html" class="side-link">
+          <span class="side-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8.5" r="3.4" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M5 19.5c0-3.6 3.1-6 7-6s7 2.4 7 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
+          <span class="side-link-label">My Profile</span>
+      </a>
+      <a href="documents.html" class="side-link">
+          <span class="side-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8.5A2.5 2.5 0 0 1 6.5 6h3.6l1.6 2h5.8A2.5 2.5 0 0 1 20 10.5v6A2.5 2.5 0 0 1 17.5 19h-11A2.5 2.5 0 0 1 4 16.5z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></span>
+          <span class="side-link-label">My Documents</span>
+      </a>
+      <a href="requests.html" class="side-link">
+          <span class="side-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3.5h6l4 4V20a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1V4.5a1 1 0 0 1 1-1Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9.5 12.5h5M9.5 16h5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
+          <span class="side-link-label">My Request</span>
+      </a>
+      <a href="directory.html" class="side-link">
+          <span class="side-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8.5" r="3" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M3.5 19c0-3 2.5-5 5.5-5s5.5 2 5.5 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="17" cy="9" r="2.3" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M15.2 13.6c2.4.2 4.3 1.9 4.3 4.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
+          <span class="side-link-label">Directory</span>
+      </a>
+      <a href="timesheets.html" class="side-link active">
+          <span class="side-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M3.5 9.5h17" stroke="currentColor" stroke-width="1.6"/></svg></span>
+          <span class="side-link-label">Timesheets</span>
+          <span class="nav-badge">1</span>
+      </a>
+      <a href="checklists.html" class="side-link">
+          <span class="side-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5 9.5 17 19 6.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span class="side-link-label">Checklists</span>
+          <span class="nav-badge">2</span>
+      </a>
+      <a href="expenses.html" class="side-link">
+          <span class="side-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="6.5" width="17" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M3.5 10h17" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="16.5" cy="14" r="1.3" fill="currentColor"/></svg></span>
+          <span class="side-link-label">Expenses</span>
+      </a>
+      <a href="forms.html" class="side-link">
+          <span class="side-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v1.3a1.7 1.7 0 0 0 0 3.4V15a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-1.3a1.7 1.7 0 0 0 0-3.4z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></span>
+          <span class="side-link-label">Forms</span>
+      </a>
+      <a href="#" class="side-link" data-placeholder="News">
+          <span class="side-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5.5" width="13" height="14" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M16.5 8.5H19a1.5 1.5 0 0 1 1.5 1.5v8a1.5 1.5 0 0 1-1.5 1.5h-2.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M6.5 9h6M6.5 12h6M6.5 15h4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
+          <span class="side-link-label">News</span>
+      </a>
+      <a href="#" class="side-link" data-placeholder="Library">
+          <span class="side-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 6c-1.6-1.2-3.8-1.7-6-1.5v13c2.2-.2 4.4.3 6 1.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 6c1.6-1.2 3.8-1.7 6-1.5v13c-2.2-.2-4.4.3-6 1.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 6v13" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
+          <span class="side-link-label">Library</span>
+      </a>
+      <a href="#" class="side-link" data-placeholder="Pinboard">
+          <span class="side-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5c-2.5 0-4.5 2-4.5 4.5 0 3 4.5 8.5 4.5 8.5s4.5-5.5 4.5-8.5c0-2.5-2-4.5-4.5-4.5Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="8" r="1.8" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></span>
+          <span class="side-link-label">Pinboard</span>
+      </a>
+      <a href="#" class="side-link" data-placeholder="Time Off & Leave">
+          <span class="side-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M3.5 9.5h17M8 3v3.5M16 3v3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
+          <span class="side-link-label">Time Off &amp; Leave</span>
+      </a>
+        </nav>
+      </div>
+      <div class="side-footer">
+        <p>Need help?</p>
+        <a href="mailto:it-support@teamdesk.example" class="side-help-link">Contact IT Support →</a>
+      </div>
+    </aside>
+
+    <div class="backdrop" id="backdrop"></div>
+
+    <!-- MAIN CONTENT -->
+    <main class="main">
+
+      <div class="page-heading">
+        <h1>Timesheets</h1>
+      </div>
+
+      <!-- STATS -->
+      <div class="stat-grid">
+        <div class="stat-tile">
+          <div class="stat-tile-icon tint-indigo" style="background:var(--indigo-light);color:var(--indigo);">
+            <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 9.5h17" stroke-linecap="round"/></svg>
+          </div>
+          <div class="stat-tile-body">
+            <h3 id="statThisWeek">0.0 hrs</h3>
+            <p>Logged this week</p>
+          </div>
+        </div>
+        <div class="stat-tile">
+          <div class="stat-tile-icon" style="background:var(--amber-light);color:var(--amber);">
+            <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="stat-tile-body">
+            <h3>1</h3>
+            <p>Timesheet pending approval</p>
+          </div>
+        </div>
+        <div class="stat-tile">
+          <div class="stat-tile-icon" style="background:var(--teal-light);color:var(--teal);">
+            <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12.5 9.5 17 19 6.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="stat-tile-body">
+            <h3>76.5 hrs</h3>
+            <p>Approved this month</p>
+          </div>
+        </div>
+        <div class="stat-tile">
+          <div class="stat-tile-icon" style="background:#FBE7EF;color:var(--rose);">
+            <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3.5l2.6 5.6 6 .7-4.4 4.1 1.2 6-5.4-3-5.4 3 1.2-6L3 9.8l6-.7Z" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="stat-tile-body">
+            <h3>40 hrs</h3>
+            <p>Standard week target</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid extra-grid">
+
+        <!-- CURRENT WEEK ENTRY -->
+        <section class="card ex-12" aria-label="Current week timesheet entry">
+          <div class="card-header-row">
+            <div class="card-title-row">
+              <span class="card-icon-badge tint-indigo"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 9.5h17" stroke-linecap="round"/></svg></span>
+              <h3 class="card-title">Current Week</h3>
+            </div>
+            <div class="week-nav">
+              <button type="button" class="btn-b cal-nav-btn" aria-label="Previous week">‹ Prev</button>
+              <span class="status-badge status-badge--pending" id="tsWeekLabel">Mon, 27 Jul – Sun, 02 Aug</span>
+              <button type="button" class="btn-b cal-nav-btn" aria-label="Next week">Next ›</button>
+            </div>
+          </div>
+          <p class="card-subtext">Enter the hours you worked each day and a short note on what you worked on.</p>
+
+          <form id="timesheetForm">
+            <div class="timesheet-table-wrap">
+              <table class="timesheet-table" id="timesheetTable">
+                <thead>
+                  <tr><th style="width:120px;">Day</th><th style="width:110px;">Date</th><th>Task / Project</th><th style="width:110px;">Hours</th></tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="ts-day">Monday</td>
+                    <td class="ts-date">27 Jul</td>
+                    <td><input type="text" placeholder="e.g. Sprint tickets — Checkout revamp" value="Sprint tickets — Checkout revamp"></td>
+                    <td><input type="number" min="0" max="16" step="0.5" value="8"></td>
+                  </tr>
+                  <tr>
+                    <td class="ts-day">Tuesday</td>
+                    <td class="ts-date">28 Jul</td>
+                    <td><input type="text" placeholder="What did you work on?" value="Code review + component library"></td>
+                    <td><input type="number" min="0" max="16" step="0.5" value="8"></td>
+                  </tr>
+                  <tr>
+                    <td class="ts-day">Wednesday</td>
+                    <td class="ts-date">29 Jul</td>
+                    <td><input type="text" placeholder="What did you work on?" value="Team standup + bug fixes"></td>
+                    <td><input type="number" min="0" max="16" step="0.5" value="7.5"></td>
+                  </tr>
+                  <tr>
+                    <td class="ts-day">Thursday</td>
+                    <td class="ts-date">30 Jul</td>
+                    <td><input type="text" placeholder="What did you work on?" value=""></td>
+                    <td><input type="number" min="0" max="16" step="0.5" value="0"></td>
+                  </tr>
+                  <tr>
+                    <td class="ts-day">Friday</td>
+                    <td class="ts-date">31 Jul</td>
+                    <td><input type="text" placeholder="What did you work on?" value=""></td>
+                    <td><input type="number" min="0" max="16" step="0.5" value="0"></td>
+                  </tr>
+                  <tr>
+                    <td class="ts-day">Saturday</td>
+                    <td class="ts-date">01 Aug</td>
+                    <td><input type="text" placeholder="Optional" value=""></td>
+                    <td><input type="number" min="0" max="16" step="0.5" value="0"></td>
+                  </tr>
+                  <tr>
+                    <td class="ts-day">Sunday</td>
+                    <td class="ts-date">02 Aug</td>
+                    <td><input type="text" placeholder="Optional" value=""></td>
+                    <td><input type="number" min="0" max="16" step="0.5" value="0"></td>
+                  </tr>
+                  <tr class="ts-total-row">
+                    <td colspan="3">Total for the week</td>
+                    <td id="tsTotalHours">0.0 hrs</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="timesheet-actions">
+              <button type="submit" class="btn btn-a">Submit for Approval</button>
+              <button type="button" class="btn btn-b" id="tsSaveDraft">Save as Draft</button>
+            </div>
+          </form>
+        </section>
+
+        <!-- HISTORY -->
+        <section class="card ex-12" aria-label="Timesheet history">
+          <div class="card-title-row">
+            <span class="card-icon-badge tint-teal"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 3.5v17" stroke-linecap="round"/><path d="M6 4.5h11l-2.5 3.5 2.5 3.5H6" stroke-linejoin="round"/></svg></span>
+            <h3 class="card-title">Submission History</h3>
+          </div>
+          <div class="data-table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr><th>Week</th><th>Total Hours</th><th>Submitted On</th><th>Status</th></tr>
+              </thead>
+              <tbody id="tsHistoryBody">
+                <tr>
+                  <td class="dt-primary">Mon, 20 Jul – Sun, 26 Jul</td>
+                  <td>39.5 hrs</td>
+                  <td>26 Jul 2026</td>
+                  <td><span class="status-badge status-badge--pending">Pending</span></td>
+                </tr>
+                <tr>
+                  <td class="dt-primary">Mon, 13 Jul – Sun, 19 Jul</td>
+                  <td>40.0 hrs</td>
+                  <td>19 Jul 2026</td>
+                  <td><span class="status-badge status-badge--approved">Approved</span></td>
+                </tr>
+                <tr>
+                  <td class="dt-primary">Mon, 06 Jul – Sun, 12 Jul</td>
+                  <td>36.5 hrs</td>
+                  <td>12 Jul 2026</td>
+                  <td><span class="status-badge status-badge--approved">Approved</span></td>
+                </tr>
+                <tr>
+                  <td class="dt-primary">Mon, 29 Jun – Sun, 05 Jul</td>
+                  <td>40.0 hrs</td>
+                  <td>05 Jul 2026</td>
+                  <td><span class="status-badge status-badge--approved">Approved</span></td>
+                </tr>
+                <tr>
+                  <td class="dt-primary">Mon, 22 Jun – Sun, 28 Jun</td>
+                  <td>32.0 hrs</td>
+                  <td>28 Jun 2026</td>
+                  <td><span class="status-badge status-badge--rejected">Rejected</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="script.js?v=3"></script>
+</body>
+</html>
