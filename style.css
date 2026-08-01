@@ -121,6 +121,31 @@ button { font-family: var(--font-body); cursor: pointer; border: none; backgroun
   flex-shrink: 0;
 }
 
+/* ---- Theme toggle (single button, animated moon/sun swap) ---- */
+.theme-toggle {
+  position: relative;
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  background: var(--indigo-light);
+  color: var(--indigo);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  overflow: hidden;
+  transition: background .35s ease, color .35s ease, transform .2s ease;
+}
+.theme-toggle:hover { transform: rotate(-10deg) scale(1.06); }
+.theme-toggle:active { transform: scale(0.9); }
+.theme-icon {
+  position: absolute;
+  width: 19px; height: 19px;
+  transition: transform .5s cubic-bezier(.4,0,.2,1), opacity .35s ease;
+}
+.theme-toggle .moon-icon { opacity: 1; transform: translateY(0) rotate(0deg) scale(1); }
+.theme-toggle .sun-icon { opacity: 0; transform: translateY(14px) rotate(-90deg) scale(0.4); }
+.theme-toggle.is-dark { background: rgba(251,191,36,0.18); color: #FBBF24; }
+.theme-toggle.is-dark .moon-icon { opacity: 0; transform: translateY(-14px) rotate(90deg) scale(0.4); }
+.theme-toggle.is-dark .sun-icon { opacity: 1; transform: translateY(0) rotate(0deg) scale(1); }
+
 .hamburger {
   display: flex;
   width: 34px; height: 34px;
@@ -210,6 +235,19 @@ button { font-family: var(--font-body); cursor: pointer; border: none; backgroun
   display: block;
   border-radius: 50%;
 }
+.sidebar-profile-avatar {
+  width: 41px; height: 41px; /* 3% larger than the standard 40px "TK" avatar used elsewhere */
+  border-radius: 50%;
+  background: var(--teal-light);
+  color: var(--teal);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 700; font-size: 14px;
+  flex-shrink: 0;
+  border: 2px solid rgba(255,255,255,0.55);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.18);
+  transition: width .25s ease, height .25s ease;
+}
 .sidebar-profile-name {
   font-family: var(--font-display);
   font-weight: 600;
@@ -273,6 +311,7 @@ button { font-family: var(--font-body); cursor: pointer; border: none; backgroun
 .sidebar.is-collapsed .side-link { justify-content: center; padding: 11px 0; gap: 0; }
 .sidebar.is-collapsed .sidebar-profile { padding-bottom: 14px; }
 .sidebar.is-collapsed .sidebar-profile-photo { width: 20px; height: 20px; }
+.sidebar.is-collapsed .sidebar-profile-avatar { width: 30px; height: 30px; font-size: 12px; }
 .sidebar.is-collapsed .nav-badge {
   position: absolute;
   top: 6px; right: 14px;
@@ -342,6 +381,32 @@ button { font-family: var(--font-body); cursor: pointer; border: none; backgroun
   min-width: 100%;
   padding: 40px 48px 48px;
   color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+}
+.slide-content { flex: 1; min-width: 0; position: relative; z-index: 1; }
+.slide-illustration {
+  flex-shrink: 0;
+  width: 148px; height: 148px;
+  display: flex; align-items: center; justify-content: center;
+  position: relative;
+}
+.slide-illustration svg { width: 100%; height: 100%; opacity: 0.55; }
+.slide-icon-img {
+  position: absolute;
+  width: 108px; height: 108px;
+  object-fit: contain;
+  filter: drop-shadow(0 12px 22px rgba(0,0,0,0.28));
+  animation: slide-icon-float 4s ease-in-out infinite;
+}
+@keyframes slide-icon-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+@media (max-width: 768px) {
+  .slide-illustration { display: none; }
 }
 .slide--indigo { background: linear-gradient(135deg, #3730A3, #6D5AE6); }
 .slide--teal { background: linear-gradient(135deg, #0F9B8E, #14C4B4); }
@@ -467,6 +532,48 @@ button { font-family: var(--font-body); cursor: pointer; border: none; backgroun
 }
 .spotlight-quote { font-size: 15px; line-height: 1.5; margin-bottom: 6px; max-width: 640px; }
 .spotlight-name { font-size: 13px; color: var(--slate); font-weight: 600; }
+
+/* ---- Enhanced spotlight photo cards ---- */
+.spotlight { min-height: 150px; }
+.spotlight-slide { gap: 22px; }
+.spotlight-avatar-wrapper {
+  position: relative;
+  width: 74px; height: 74px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  padding: 3px;
+  background: linear-gradient(135deg, var(--indigo), var(--rose), var(--amber));
+  box-shadow: 0 10px 22px rgba(55,48,163,0.28);
+}
+.spotlight-avatar-img {
+  width: 100%; height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  border: 3px solid var(--card-bg);
+}
+.spotlight-text { position: relative; padding-left: 6px; }
+.spotlight-text::before {
+  content: '\201C';
+  position: absolute;
+  left: -8px; top: -26px;
+  font-family: Georgia, serif;
+  font-size: 56px;
+  font-weight: 700;
+  color: var(--indigo-light);
+  line-height: 1;
+  z-index: 0;
+  pointer-events: none;
+}
+.spotlight-text .spotlight-quote { position: relative; font-style: italic; z-index: 1; }
+.spotlight-name { display: inline-flex; align-items: center; gap: 6px; }
+.spotlight-name::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--teal);
+  flex-shrink: 0;
+}
 
 .spotlight-dots { display: flex; gap: 6px; margin-top: 18px; }
 .spotlight-dots .dot-btn { width: 6px; height: 6px; border-radius: 50%; background: var(--border); }
@@ -1558,14 +1665,32 @@ margin-top:15px;
   padding: 20px 14px;
   transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
 }
-.shortcut-item:hover {
+.shortcut-item:hover,
+.shortcut-item:focus-visible {
   transform: translateY(-3px);
-  box-shadow: 0 10px 20px rgba(26,27,35,0.08);
+  box-shadow: 0 14px 28px rgba(109,90,230,0.32);
   border-color: transparent;
+  background: linear-gradient(135deg, var(--indigo), #6D5AE6);
 }
-.shortcut-item .request-icon { margin: 0 auto; }
+.shortcut-item:active {
+  transform: translateY(-1px) scale(0.98);
+  background: linear-gradient(135deg, #2d2882, var(--indigo));
+  box-shadow: 0 8px 18px rgba(55,48,163,0.32);
+}
+.shortcut-item:hover .request-icon,
+.shortcut-item:active .request-icon,
+.shortcut-item:focus-visible .request-icon {
+  background: rgba(255,255,255,0.2);
+  color: #fff;
+}
+.shortcut-item:hover .request-info h4,
+.shortcut-item:active .request-info h4,
+.shortcut-item:focus-visible .request-info h4 {
+  color: #fff;
+}
+.shortcut-item .request-icon { margin: 0 auto; transition: background .18s ease, color .18s ease; }
 .shortcut-item .request-info { flex: none; }
-.shortcut-item .request-info h4 { margin-bottom: 0; font-size: 13.5px; }
+.shortcut-item .request-info h4 { margin-bottom: 0; font-size: 13.5px; transition: color .18s ease; }
 
 /* ---- Card heading icon badges (light tint fill) ---- */
 .card-title-row { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
@@ -1612,17 +1737,50 @@ margin-top:15px;
 .data-table td.dt-primary { font-weight: 700; }
 .data-table td.dt-muted { color: var(--slate); white-space: normal; }
 
-/* ---- Purple "Update" buttons ---- */
+/* ---- Purple "Update" buttons — rounded, bold, and popping out ---- */
 .ex-update-btn {
-  background: var(--indigo);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 11px 24px;
+  border-radius: 14px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  background: linear-gradient(135deg, var(--indigo), #5A4FD1);
   color: #fff;
   border: none;
-  box-shadow: 0 6px 14px rgba(55,48,163,0.22);
+  flex-shrink: 0;
+  white-space: nowrap;
+  box-shadow: 0 10px 22px rgba(55,48,163,0.32), 0 2px 6px rgba(55,48,163,0.2);
+  transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
 }
-.ex-update-btn:hover { background: #2d2882; }
+.ex-update-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(55,48,163,0.4), 0 4px 10px rgba(55,48,163,0.28);
+  background: linear-gradient(135deg, #423bc7, #6d5ae6);
+}
+.ex-update-btn:active { transform: translateY(0) scale(0.96); }
 
-/* ---- You Report To / Job Portal — fill available height ---- */
-.report-to-card, .job-portal-card { display: flex; flex-direction: column; height: 100%; }
+/* ---- Reporting row: let each card size to its own content instead of
+   all three stretching to match the tallest one ---- */
+.reporting-row { align-items: start; }
+
+/* ---- You Report To / Job Portal — content-sized, not stretched ---- */
+.report-to-card, .job-portal-card { display: flex; flex-direction: column; }
+
+/* ---- Recent Reviews — full, airy table instead of a cramped strip ---- */
+.recent-reviews-card { display: flex; flex-direction: column; }
+.recent-reviews-card .data-table-wrap { flex: 1; }
+.full-height-table { table-layout: auto; }
+.full-height-table th,
+.full-height-table td {
+  padding: 19px 16px;
+  white-space: normal;
+  word-break: normal;
+  overflow-wrap: normal;
+}
+.full-height-table td.dt-muted { line-height: 1.5; }
 .report-to-meta {
   display: flex;
   flex-direction: column;
@@ -1741,4 +1899,101 @@ margin-top:15px;
   .profile-info-table, .profile-info-table tbody, .profile-info-table tr { display: block; }
   .profile-info-table tr { padding: 6px 0; }
   .profile-info-table td { display: inline-block; padding: 4px 8px 4px 0; }
+}
+
+/* =========================================================
+   DARK THEME
+   Toggled via [data-theme="dark"] on <html>. Redefines the
+   design tokens so every component that already uses
+   var(--card-bg)/var(--border)/var(--ink) etc. re-themes for
+   free; the handful of hardcoded light surfaces below get an
+   explicit dark equivalent.
+   ========================================================= */
+html[data-theme="dark"] {
+  --indigo: #7C6FEF;
+  --indigo-light: rgba(124,111,239,0.18);
+  --lilac: #B7A6FB;
+  --teal: #2DD4BF;
+  --teal-light: rgba(45,212,191,0.16);
+  --amber: #FBBF24;
+  --amber-light: rgba(251,191,36,0.16);
+  --rose: #FB7185;
+  --rose-light: rgba(251,113,133,0.16);
+
+  --ink: #EDEEF6;
+  --slate: #A7A9C4;
+  --slate-light: #72748F;
+  --bg: #14151F;
+  --card-bg: #1B1D2B;
+  --border: rgba(255,255,255,0.09);
+  --shadow: 0 10px 30px rgba(0,0,0,0.45);
+}
+
+html[data-theme="dark"] body {
+  background:
+    radial-gradient(1100px 620px at 8% -10%, rgba(124,111,239,0.16), transparent 60%),
+    radial-gradient(900px 560px at 100% 8%, rgba(45,212,191,0.10), transparent 55%),
+    radial-gradient(800px 700px at 30% 110%, rgba(251,191,36,0.06), transparent 55%),
+    linear-gradient(180deg, #0E0F17 0%, #121320 55%, #14151F 100%);
+  background-attachment: fixed;
+}
+html[data-theme="dark"] body::before { background: radial-gradient(circle, rgba(124,111,239,0.20), transparent 70%); }
+html[data-theme="dark"] body::after { background: radial-gradient(circle, rgba(45,212,191,0.16), transparent 70%); }
+
+html[data-theme="dark"] .site-header {
+  background: rgba(18,19,28,0.72);
+  border-bottom-color: var(--border);
+}
+
+/* Surfaces that were hardcoded to white/light rgba rather than a variable */
+html[data-theme="dark"] .page-card,
+html[data-theme="dark"] .doc-card,
+html[data-theme="dark"] .directory-row {
+  background: rgba(27,29,43,0.85);
+}
+html[data-theme="dark"] .search-input,
+html[data-theme="dark"] .form-field input,
+html[data-theme="dark"] .request-form input,
+html[data-theme="dark"] .request-form select,
+html[data-theme="dark"] .request-form textarea,
+html[data-theme="dark"] .timesheet-table input,
+html[data-theme="dark"] .checklist-check,
+html[data-theme="dark"] .profile-edit-badge,
+html[data-theme="dark"] .chat-window,
+html[data-theme="dark"] .chat-msg.received,
+html[data-theme="dark"] .chat-window-input-row {
+  background: var(--card-bg);
+}
+html[data-theme="dark"] .request-modal-card { background: rgba(27,29,43,0.94); }
+html[data-theme="dark"] .toast { background: rgba(27,29,43,0.96); }
+
+/* Rose tint chips were hardcoded to a light hex rather than var(--rose-light) */
+html[data-theme="dark"] .request-icon--rose,
+html[data-theme="dark"] .doc-icon--rose,
+html[data-theme="dark"] .expense-cat-icon--software,
+html[data-theme="dark"] .status-badge--rejected,
+html[data-theme="dark"] .toast.toast--error .toast-icon {
+  background: var(--rose-light);
+}
+
+html[data-theme="dark"] .toggle-switch { background: rgba(255,255,255,0.14); }
+html[data-theme="dark"] .filter-tab { background: var(--bg); }
+
+html[data-theme="dark"] .profile-overview {
+  background: linear-gradient(120deg, rgba(124,111,239,0.16) 0%, rgba(124,111,239,0.05) 38%, var(--card-bg) 62%);
+}
+html[data-theme="dark"] .profile-info-table tr,
+html[data-theme="dark"] .profile-overview-top {
+  border-color: rgba(255,255,255,0.08);
+}
+
+/* Shadows read as pure black smudges on a dark background — soften them */
+html[data-theme="dark"] .card:hover,
+html[data-theme="dark"] .doc-card:hover,
+html[data-theme="dark"] .stat-tile:hover {
+  box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+}
+html[data-theme="dark"] .directory-row:hover,
+html[data-theme="dark"] .request-row:hover {
+  border-color: rgba(124,111,239,0.35);
 }

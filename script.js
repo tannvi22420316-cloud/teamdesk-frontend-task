@@ -63,6 +63,35 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  /* ---------- Dark / light theme toggle (present on every page) ---------- */
+  const themeToggle = document.getElementById('themeToggle');
+  if (themeToggle) {
+    const THEME_KEY = 'td-theme';
+    const html = document.documentElement;
+
+    // The <head> of every page also sets data-theme="dark" early (before this
+    // script runs) to avoid a flash of the wrong theme, so this just needs to
+    // sync the toggle button's visual state and saved preference on load.
+    const applyThemeState = (isDark) => {
+      if (isDark) {
+        html.setAttribute('data-theme', 'dark');
+      } else {
+        html.removeAttribute('data-theme');
+      }
+      themeToggle.classList.toggle('is-dark', isDark);
+      themeToggle.setAttribute('aria-pressed', String(isDark));
+    };
+
+    let isDark = localStorage.getItem(THEME_KEY) === 'dark';
+    applyThemeState(isDark);
+
+    themeToggle.addEventListener('click', () => {
+      isDark = !isDark;
+      localStorage.setItem(THEME_KEY, isDark ? 'dark' : 'light');
+      applyThemeState(isDark);
+    });
+  }
+
   /* ---------- Hamburger / collapsible sidebar (present on every page) ---------- */
   const hamburgerBtn = document.getElementById('hamburgerBtn');
   const sidebar = document.getElementById('sidebar');
