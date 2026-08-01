@@ -92,9 +92,11 @@ button { font-family: var(--font-body); cursor: pointer; border: none; backgroun
   backdrop-filter: blur(14px) saturate(160%);
   -webkit-backdrop-filter: blur(14px) saturate(160%);
   border-bottom: 1px solid var(--border);
-  position: sticky;
+  position: fixed;
   top: 0;
-  z-index: 30;
+  left: 0;
+  right: 0;
+  z-index: 40;
 }
 .brand { display: flex; align-items: center; gap: 10px; }
 .brand-mark {
@@ -157,24 +159,25 @@ button { font-family: var(--font-body); cursor: pointer; border: none; backgroun
   display: flex;
   align-items: flex-start;
   max-width: 1400px;
-  margin: 0 auto;
+  margin: var(--header-h) auto 0;
   width: 100%;
 }
 
 .sidebar {
+  position: fixed;
+  top: var(--header-h);
+  left: 0;
   width: var(--sidebar-w);
-  flex-shrink: 0;
   height: calc(100vh - var(--header-h));
   overflow-y: auto;
   overflow-x: hidden;
-  padding: 24px 14px;
   background: var(--indigo);
+  padding: 24px 14px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  position: sticky;
-  top: var(--header-h);
   transition: width .25s ease, padding .25s ease;
+  z-index: 20;
   scrollbar-width: thin;
   scrollbar-color: rgba(255,255,255,0.35) transparent;
 }
@@ -261,6 +264,9 @@ button { font-family: var(--font-body); cursor: pointer; border: none; backgroun
 
 /* --- Collapsed (icon-only) sidebar state --- */
 .sidebar.is-collapsed { width: var(--sidebar-w-collapsed); padding: 24px 10px; }
+.sidebar.is-collapsed + .backdrop + .main {
+  margin-left: var(--sidebar-w-collapsed);
+}
 .sidebar.is-collapsed .side-link-label,
 .sidebar.is-collapsed .sidebar-profile-name,
 .sidebar.is-collapsed .side-footer { display: none; }
@@ -290,6 +296,7 @@ button { font-family: var(--font-body); cursor: pointer; border: none; backgroun
   min-width: 0;
   width: 100%;
   max-width: 100%;
+  margin-left: var(--sidebar-w);
   padding: 32px 32px 64px;
   overflow-x: hidden;
 }
@@ -497,6 +504,7 @@ button { font-family: var(--font-body); cursor: pointer; border: none; backgroun
     z-index: 40;
     padding: 20px 10px;
     box-shadow: 4px 0 16px rgba(26,27,35,0.10);
+    align-self: auto;
   }
   .sidebar:not(.is-collapsed) {
     width: 82vw;

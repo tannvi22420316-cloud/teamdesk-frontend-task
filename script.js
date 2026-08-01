@@ -143,6 +143,10 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ---------- Placeholder links (pages not yet built) — sidebar items and shortcut tiles ---------- */
   document.querySelectorAll('[data-placeholder]').forEach((link) => {
     link.addEventListener('click', (e) => {
+      const href = link.getAttribute('href');
+      if (href && href !== '#' && href !== '') {
+        return;
+      }
       e.preventDefault();
       showToast(`${link.dataset.placeholder} is coming soon.`);
     });

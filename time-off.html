@@ -1,0 +1,1267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Time Off & Leave — TeamDesk</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css?v=5" />
+    <style>
+        /* =========================================================
+           TIME OFF & LEAVE PAGE — UNIQUE DASHBOARD STYLE
+           ========================================================= */
+
+        /* --- Hero / Header with wave accent --- */
+        .leave-hero {
+            grid-column: span 12;
+            border-radius: var(--radius);
+            overflow: hidden;
+            position: relative;
+            background: linear-gradient(145deg, #1A1B3A 0%, #2D2A6E 45%, #4A3F8A 100%);
+            padding: 0;
+            min-height: 200px;
+            display: flex;
+            align-items: center;
+            isolation: isolate;
+        }
+        .leave-hero::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 50% 40% at 5% 60%, rgba(167, 139, 250, 0.20), transparent 55%),
+                radial-gradient(ellipse 40% 30% at 95% 20%, rgba(15, 155, 142, 0.12), transparent 50%),
+                radial-gradient(ellipse 30% 30% at 50% 100%, rgba(217, 127, 6, 0.08), transparent 40%);
+            z-index: 0;
+            pointer-events: none;
+        }
+        .leave-hero-content {
+            position: relative;
+            z-index: 1;
+            padding: 28px 44px;
+            flex: 1;
+            color: #fff;
+        }
+        .leave-hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            background: rgba(255, 255, 255, 0.10);
+            backdrop-filter: blur(6px);
+            padding: 5px 14px 5px 10px;
+            border-radius: 20px;
+            margin-bottom: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+        .leave-hero-badge .badge-icon {
+            width: 14px;
+            height: 14px;
+            color: #3EDBB0;
+        }
+        .leave-hero h1 {
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            max-width: 420px;
+            line-height: 1.15;
+            margin-bottom: 6px;
+        }
+        .leave-hero p {
+            font-size: 14px;
+            opacity: 0.8;
+            max-width: 400px;
+            line-height: 1.6;
+        }
+        .leave-hero-stats {
+            display: flex;
+            gap: 32px;
+            margin-top: 16px;
+        }
+        .leave-hero-stats .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 13px;
+            opacity: 0.85;
+        }
+        .leave-hero-stats .stat-item .stat-num {
+            font-size: 22px;
+            font-weight: 700;
+            opacity: 1;
+            font-family: var(--font-display);
+        }
+        .leave-hero-stats .stat-item .stat-label {
+            font-size: 11.5px;
+            opacity: 0.7;
+        }
+        .leave-hero-illustration {
+            flex: 0 0 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px 28px 16px 0;
+            position: relative;
+            z-index: 1;
+        }
+        .leave-hero-illustration svg {
+            width: 110px;
+            height: 110px;
+            filter: drop-shadow(0 12px 32px rgba(0, 0, 0, 0.20));
+        }
+        .leave-hero-illustration .orb-float {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(50px);
+            pointer-events: none;
+        }
+        .leave-hero-illustration .orb-float-1 {
+            width: 140px;
+            height: 140px;
+            background: rgba(167, 139, 250, 0.18);
+            top: -10px;
+            right: 10px;
+        }
+        .leave-hero-illustration .orb-float-2 {
+            width: 90px;
+            height: 90px;
+            background: rgba(15, 155, 142, 0.14);
+            bottom: 0px;
+            left: 5px;
+        }
+
+        /* --- Balance Cards (unique card style with progress) --- */
+        .balance-grid {
+            grid-column: span 12;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+        .balance-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
+            padding: 20px 22px 18px;
+            transition: transform .18s ease, box-shadow .18s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .balance-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 32px rgba(26, 27, 35, 0.10);
+        }
+        .balance-card .balance-top {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        .balance-card .balance-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .balance-card .balance-icon svg {
+            width: 20px;
+            height: 20px;
+        }
+        .balance-card .balance-icon.tint-indigo {
+            background: var(--indigo-light);
+            color: var(--indigo);
+        }
+        .balance-card .balance-icon.tint-teal {
+            background: var(--teal-light);
+            color: var(--teal);
+        }
+        .balance-card .balance-icon.tint-amber {
+            background: var(--amber-light);
+            color: var(--amber);
+        }
+        .balance-card .balance-icon.tint-rose {
+            background: var(--rose-light);
+            color: var(--rose);
+        }
+        .balance-card .balance-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--slate-light);
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+        .balance-card .balance-number {
+            font-size: 28px;
+            font-weight: 700;
+            font-family: var(--font-display);
+            line-height: 1.1;
+            margin-top: 2px;
+        }
+        .balance-card .balance-number .denom {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--slate-light);
+        }
+        .balance-card .balance-progress {
+            margin-top: 12px;
+            width: 100%;
+            height: 5px;
+            border-radius: 4px;
+            background: var(--bg);
+            overflow: hidden;
+        }
+        .balance-card .balance-progress .fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width .6s ease;
+        }
+        .balance-card .balance-progress .fill.indigo {
+            background: var(--indigo);
+        }
+        .balance-card .balance-progress .fill.teal {
+            background: var(--teal);
+        }
+        .balance-card .balance-progress .fill.amber {
+            background: var(--amber);
+        }
+        .balance-card .balance-progress .fill.rose {
+            background: var(--rose);
+        }
+        .balance-card .balance-used {
+            display: flex;
+            justify-content: space-between;
+            font-size: 11.5px;
+            color: var(--slate-light);
+            margin-top: 6px;
+        }
+        .balance-card .balance-used span:last-child {
+            font-weight: 600;
+            color: var(--slate);
+        }
+        .balance-card .balance-accent-line {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+        }
+        .balance-card .balance-accent-line.indigo {
+            background: var(--indigo);
+        }
+        .balance-card .balance-accent-line.teal {
+            background: var(--teal);
+        }
+        .balance-card .balance-accent-line.amber {
+            background: var(--amber);
+        }
+        .balance-card .balance-accent-line.rose {
+            background: var(--rose);
+        }
+
+        /* --- Leave Request Form (centered card) --- */
+        .leave-request-section {
+            grid-column: span 7;
+        }
+        .leave-request-section .card {
+            padding: 28px 30px;
+        }
+        .leave-request-section .card .card-title-row {
+            margin-bottom: 18px;
+        }
+        .leave-request-section .card .card-title-row h3 {
+            font-size: 17px;
+            font-weight: 700;
+        }
+
+        .leave-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px 20px;
+        }
+        .leave-form .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        .leave-form .form-group.full-width {
+            grid-column: span 2;
+        }
+        .leave-form .form-group label {
+            font-size: 12.5px;
+            font-weight: 600;
+            color: var(--slate);
+        }
+        .leave-form .form-group input,
+        .leave-form .form-group select,
+        .leave-form .form-group textarea {
+            padding: 10px 14px;
+            border: 1.5px solid var(--border);
+            border-radius: 10px;
+            font-size: 13.5px;
+            font-family: var(--font-body);
+            color: var(--ink);
+            background: #fff;
+            transition: border-color .2s ease;
+            width: 100%;
+        }
+        .leave-form .form-group input:focus,
+        .leave-form .form-group select:focus,
+        .leave-form .form-group textarea:focus {
+            outline: none;
+            border-color: var(--indigo);
+            box-shadow: 0 0 0 4px rgba(55, 48, 163, 0.06);
+        }
+        .leave-form .form-group textarea {
+            resize: vertical;
+            min-height: 70px;
+        }
+        .leave-form .form-actions {
+            grid-column: span 2;
+            display: flex;
+            gap: 12px;
+            margin-top: 6px;
+            flex-wrap: wrap;
+        }
+        .leave-form .form-actions .btn {
+            padding: 11px 28px;
+            border-radius: 10px;
+            font-size: 13.5px;
+            font-weight: 700;
+        }
+
+        /* --- Quick Stats (right side) --- */
+        .leave-quick-stats {
+            grid-column: span 5;
+        }
+        .leave-quick-stats .card {
+            padding: 28px 30px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        .leave-quick-stats .card .card-title-row {
+            margin-bottom: 16px;
+        }
+        .leave-quick-stats .card .card-title-row h3 {
+            font-size: 17px;
+            font-weight: 700;
+        }
+
+        .quick-stat-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            flex: 1;
+        }
+        .quick-stat-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 16px;
+            border-radius: 12px;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            transition: transform .15s ease, border-color .15s ease;
+        }
+        .quick-stat-item:hover {
+            transform: translateX(4px);
+            border-color: var(--indigo);
+        }
+        .quick-stat-item .qs-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .quick-stat-item .qs-icon {
+            width: 34px;
+            height: 34px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .quick-stat-item .qs-icon svg {
+            width: 16px;
+            height: 16px;
+        }
+        .quick-stat-item .qs-icon.tint-indigo {
+            background: var(--indigo-light);
+            color: var(--indigo);
+        }
+        .quick-stat-item .qs-icon.tint-teal {
+            background: var(--teal-light);
+            color: var(--teal);
+        }
+        .quick-stat-item .qs-icon.tint-amber {
+            background: var(--amber-light);
+            color: var(--amber);
+        }
+        .quick-stat-item .qs-icon.tint-rose {
+            background: var(--rose-light);
+            color: var(--rose);
+        }
+        .quick-stat-item .qs-info h4 {
+            font-size: 13.5px;
+            font-weight: 700;
+            margin-bottom: 1px;
+        }
+        .quick-stat-item .qs-info p {
+            font-size: 11.5px;
+            color: var(--slate-light);
+        }
+        .quick-stat-item .qs-value {
+            font-size: 14px;
+            font-weight: 700;
+            font-family: var(--font-display);
+            color: var(--ink);
+        }
+
+        /* --- Leave History Table --- */
+        .leave-history-section {
+            grid-column: span 12;
+        }
+        .leave-history-section .card {
+            padding: 24px 26px 20px;
+        }
+        .leave-history-section .card .card-header-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .leave-history-section .card .card-header-row .card-title-row {
+            margin-bottom: 0;
+        }
+        .leave-history-section .card .card-header-row .card-title-row h3 {
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .leave-history-table-wrap {
+            overflow-x: auto;
+        }
+        .leave-history-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 600px;
+        }
+        .leave-history-table th,
+        .leave-history-table td {
+            padding: 12px 14px;
+            font-size: 13px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+        .leave-history-table th {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            color: var(--slate-light);
+            background: var(--bg);
+        }
+        .leave-history-table th:first-child {
+            border-radius: 10px 0 0 0;
+        }
+        .leave-history-table th:last-child {
+            border-radius: 0 10px 0 0;
+        }
+        .leave-history-table td {
+            color: var(--ink);
+        }
+        .leave-history-table td.dt-primary {
+            font-weight: 700;
+        }
+        .leave-history-table td.dt-muted {
+            color: var(--slate);
+        }
+        .leave-history-table tbody tr {
+            transition: background .15s ease;
+        }
+        .leave-history-table tbody tr:hover {
+            background: var(--indigo-light);
+        }
+        .leave-history-table .status-badge {
+            font-size: 11px;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 20px;
+            white-space: nowrap;
+        }
+
+        /* --- Upcoming Holidays (compact) --- */
+        .holiday-compact {
+            grid-column: span 12;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+        .holiday-compact .holiday-mini {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
+            padding: 18px 22px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            transition: transform .18s ease, box-shadow .18s ease;
+        }
+        .holiday-compact .holiday-mini:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 28px rgba(26, 27, 35, 0.08);
+        }
+        .holiday-compact .holiday-mini .h-date {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: var(--amber-light);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .holiday-compact .holiday-mini .h-date .day {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 17px;
+            color: var(--amber);
+            line-height: 1;
+        }
+        .holiday-compact .holiday-mini .h-date .mon {
+            font-size: 9px;
+            font-weight: 700;
+            color: var(--amber);
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+        .holiday-compact .holiday-mini .h-info h4 {
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 2px;
+        }
+        .holiday-compact .holiday-mini .h-info p {
+            font-size: 12px;
+            color: var(--slate-light);
+        }
+        .holiday-compact .holiday-mini .h-countdown {
+            margin-left: auto;
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--teal);
+            background: var(--teal-light);
+            padding: 3px 12px;
+            border-radius: 20px;
+            white-space: nowrap;
+        }
+
+        /* --- Responsive --- */
+        @media (max-width: 1100px) {
+            .balance-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .leave-request-section {
+                grid-column: span 12;
+            }
+            .leave-quick-stats {
+                grid-column: span 12;
+            }
+            .holiday-compact {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 820px) {
+            .leave-hero {
+                flex-direction: column;
+                min-height: auto;
+            }
+            .leave-hero-content {
+                padding: 24px 24px 12px;
+            }
+            .leave-hero h1 {
+                font-size: 22px;
+            }
+            .leave-hero-illustration {
+                flex: none;
+                padding: 0 24px 20px;
+                justify-content: flex-start;
+            }
+            .leave-hero-illustration svg {
+                width: 80px;
+                height: 80px;
+            }
+            .leave-hero-stats {
+                flex-wrap: wrap;
+                gap: 16px;
+            }
+            .leave-hero-stats .stat-item .stat-num {
+                font-size: 18px;
+            }
+            .balance-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .holiday-compact {
+                grid-template-columns: 1fr;
+            }
+            .leave-form {
+                grid-template-columns: 1fr;
+            }
+            .leave-form .form-group.full-width {
+                grid-column: span 1;
+            }
+            .leave-form .form-actions {
+                grid-column: span 1;
+            }
+            .leave-request-section .card {
+                padding: 20px;
+            }
+            .leave-quick-stats .card {
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 540px) {
+            .balance-grid {
+                grid-template-columns: 1fr;
+            }
+            .leave-hero-content {
+                padding: 16px 16px 8px;
+            }
+            .leave-hero h1 {
+                font-size: 19px;
+            }
+            .leave-hero p {
+                font-size: 13px;
+            }
+            .leave-hero-illustration {
+                padding: 0 16px 14px;
+            }
+            .leave-hero-illustration svg {
+                width: 60px;
+                height: 60px;
+            }
+            .leave-hero-stats .stat-item .stat-num {
+                font-size: 16px;
+            }
+            .balance-card {
+                padding: 16px 18px;
+            }
+            .balance-card .balance-number {
+                font-size: 22px;
+            }
+            .leave-request-section .card {
+                padding: 16px;
+            }
+            .leave-quick-stats .card {
+                padding: 16px;
+            }
+            .leave-history-section .card {
+                padding: 16px 14px;
+            }
+            .leave-form .form-actions {
+                flex-direction: column;
+            }
+            .leave-form .form-actions .btn {
+                width: 100%;
+                text-align: center;
+                justify-content: center;
+            }
+            .holiday-compact .holiday-mini {
+                flex-wrap: wrap;
+            }
+            .holiday-compact .holiday-mini .h-countdown {
+                margin-left: 0;
+                margin-top: 4px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header class="site-header">
+        <button class="hamburger" id="hamburgerBtn" aria-label="Toggle menu" aria-expanded="true">
+            <span></span><span></span><span></span>
+        </button>
+        <a href="index.html" class="brand">
+            <span class="brand-mark">TD</span>
+            <span class="brand-name">TeamDesk</span>
+        </a>
+        <div class="header-right">
+            <span class="header-date" id="headerDate"></span>
+            <div class="avatar">TK</div>
+            <button class="auth-btn" id="authBtn" type="button" aria-pressed="true">
+                <span class="auth-label">Logout</span>
+            </button>
+        </div>
+    </header>
+
+    <div class="shell">
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-scroll">
+                <div class="sidebar-profile">
+                    <div class="sidebar-profile-photo">
+                        <img src="https://i.pravatar.cc/120?img=5" alt="Tannvi Kamble" />
+                    </div>
+                    <p class="sidebar-profile-name">Tannvi Kamble</p>
+                </div>
+                <nav class="side-nav">
+                    <a href="index.html" class="side-link">
+                        <span class="side-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11.5 12 4l8 7.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 10.5V19a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1v-8.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M10 20v-4.5h4V20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></span>
+                        <span class="side-link-label">Home</span>
+                    </a>
+                    <a href="settings.html" class="side-link">
+                        <span class="side-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8.5" r="3.4" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M5 19.5c0-3.6 3.1-6 7-6s7 2.4 7 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
+                        <span class="side-link-label">My Profile</span>
+                    </a>
+                    <a href="documents.html" class="side-link">
+                        <span class="side-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8.5A2.5 2.5 0 0 1 6.5 6h3.6l1.6 2h5.8A2.5 2.5 0 0 1 20 10.5v6A2.5 2.5 0 0 1 17.5 19h-11A2.5 2.5 0 0 1 4 16.5z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></span>
+                        <span class="side-link-label">My Documents</span>
+                    </a>
+                    <a href="requests.html" class="side-link">
+                        <span class="side-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3.5h6l4 4V20a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1V4.5a1 1 0 0 1 1-1Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9.5 12.5h5M9.5 16h5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
+                        <span class="side-link-label">My Request</span>
+                    </a>
+                    <a href="directory.html" class="side-link">
+                        <span class="side-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8.5" r="3" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M3.5 19c0-3 2.5-5 5.5-5s5.5 2 5.5 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="17" cy="9" r="2.3" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M15.2 13.6c2.4.2 4.3 1.9 4.3 4.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
+                        <span class="side-link-label">Directory</span>
+                    </a>
+                    <a href="timesheets.html" class="side-link">
+                        <span class="side-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M3.5 9.5h17" stroke="currentColor" stroke-width="1.6"/></svg></span>
+                        <span class="side-link-label">Timesheets</span>
+                        <span class="nav-badge">1</span>
+                    </a>
+                    <a href="checklists.html" class="side-link">
+                        <span class="side-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5 9.5 17 19 6.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                        <span class="side-link-label">Checklists</span>
+                        <span class="nav-badge">2</span>
+                    </a>
+                    <a href="expenses.html" class="side-link">
+                        <span class="side-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="6.5" width="17" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M3.5 10h17" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="16.5" cy="14" r="1.3" fill="currentColor"/></svg></span>
+                        <span class="side-link-label">Expenses</span>
+                    </a>
+                    <a href="forms.html" class="side-link">
+                        <span class="side-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v1.3a1.7 1.7 0 0 0 0 3.4V15a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-1.3a1.7 1.7 0 0 0 0-3.4z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></span>
+                        <span class="side-link-label">Forms</span>
+                    </a>
+                    <a href="news.html" class="side-link">
+                        <span class="side-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5.5" width="13" height="14" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M16.5 8.5H19a1.5 1.5 0 0 1 1.5 1.5v8a1.5 1.5 0 0 1-1.5 1.5h-2.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M6.5 9h6M6.5 12h6M6.5 15h4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
+                        <span class="side-link-label">News</span>
+                        <span class="nav-badge">3</span>
+                    </a>
+                    <a href="library.html" class="side-link">
+                        <span class="side-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 6c-1.6-1.2-3.8-1.7-6-1.5v13c2.2-.2 4.4.3 6 1.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 6c1.6-1.2 3.8-1.7 6-1.5v13c-2.2-.2-4.4.3-6 1.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 6v13" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
+                        <span class="side-link-label">Library</span>
+                        <span class="nav-badge">8</span>
+                    </a>
+                    <a href="pinboard.html" class="side-link">
+                        <span class="side-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5c-2.5 0-4.5 2-4.5 4.5 0 3 4.5 8.5 4.5 8.5s4.5-5.5 4.5-8.5c0-2.5-2-4.5-4.5-4.5Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="8" r="1.8" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></span>
+                        <span class="side-link-label">Pinboard</span>
+                        <span class="nav-badge">5</span>
+                    </a>
+                    <a href="timeoff.html" class="side-link active">
+                        <span class="side-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M3.5 9.5h17M8 3v3.5M16 3v3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
+                        <span class="side-link-label">Time Off &amp; Leave</span>
+                        <span class="nav-badge">2</span>
+                    </a>
+                </nav>
+            </div>
+            <div class="side-footer">
+                <p>Need help?</p>
+                <a href="mailto:it-support@teamdesk.example" class="side-help-link">Contact IT Support →</a>
+            </div>
+        </aside>
+
+        <div class="backdrop" id="backdrop"></div>
+
+        <!-- MAIN CONTENT -->
+        <main class="main">
+
+            <div class="page-heading">
+                <h1>Time Off &amp; Leave</h1>
+            </div>
+
+            <!-- =========================================================
+            HERO
+            ========================================================= -->
+            <div class="grid">
+                <section class="leave-hero" aria-label="Leave summary">
+                    <div class="leave-hero-content">
+                        <div class="leave-hero-badge">
+                            <svg class="badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 9.5h17M8 3v3.5M16 3v3.5"/></svg>
+                            Leave summary
+                        </div>
+                        <h1>Plan your time off</h1>
+                        <p>View your available balance, submit new requests, and track approvals — all in one place.</p>
+                        <div class="leave-hero-stats">
+                            <span class="stat-item">
+                                <span class="stat-num">18</span>
+                                <span class="stat-label">Available days</span>
+                            </span>
+                            <span class="stat-item">
+                                <span class="stat-num">2</span>
+                                <span class="stat-label">Pending requests</span>
+                            </span>
+                            <span class="stat-item">
+                                <span class="stat-num">4</span>
+                                <span class="stat-label">Used this year</span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="leave-hero-illustration">
+                        <div class="orb-float orb-float-1"></div>
+                        <div class="orb-float orb-float-2"></div>
+                        <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="22" y="18" width="76" height="76" rx="12" stroke="rgba(255,255,255,0.12)" stroke-width="1.5"/>
+                            <rect x="30" y="26" width="60" height="60" rx="8" stroke="rgba(255,255,255,0.06)" stroke-width="1.5"/>
+                            <path d="M38 42h44M38 52h32M38 62h38" stroke="rgba(255,255,255,0.10)" stroke-width="1.8" stroke-linecap="round"/>
+                            <circle cx="74" cy="42" r="5" stroke="rgba(255,255,255,0.08)" stroke-width="1.5"/>
+                            <path d="M74 39v6M71 42h6" stroke="rgba(255,255,255,0.12)" stroke-width="1.5" stroke-linecap="round"/>
+                            <path d="M36 78l6-6 4 4 8-8" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" opacity="0.18"/>
+                            <path d="M82 78l-4-4-4 4-8-8" stroke="rgba(255,255,255,0.12)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                </section>
+            </div>
+
+            <!-- =========================================================
+            BALANCE CARDS
+            ========================================================= -->
+            <div class="grid">
+                <div class="balance-grid">
+                    <div class="balance-card">
+                        <div class="balance-accent-line indigo"></div>
+                        <div class="balance-top">
+                            <div class="balance-icon tint-indigo">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 9.5h17M8 3v3.5M16 3v3.5"/></svg>
+                            </div>
+                            <span class="balance-label">Annual Leave</span>
+                        </div>
+                        <div class="balance-number">14 <span class="denom">/ 20 days</span></div>
+                        <div class="balance-progress"><div class="fill indigo" style="width:70%;"></div></div>
+                        <div class="balance-used"><span>Used: 6 days</span><span>Remaining: 14</span></div>
+                    </div>
+
+                    <div class="balance-card">
+                        <div class="balance-accent-line teal"></div>
+                        <div class="balance-top">
+                            <div class="balance-icon tint-teal">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5 13.6 9l5.4 1.6-5.4 1.6L12 18l-1.6-5.8L5 10.6 10.4 9Z"/></svg>
+                            </div>
+                            <span class="balance-label">Sick Leave</span>
+                        </div>
+                        <div class="balance-number">8 <span class="denom">/ 10 days</span></div>
+                        <div class="balance-progress"><div class="fill teal" style="width:20%;"></div></div>
+                        <div class="balance-used"><span>Used: 2 days</span><span>Remaining: 8</span></div>
+                    </div>
+
+                    <div class="balance-card">
+                        <div class="balance-accent-line amber"></div>
+                        <div class="balance-top">
+                            <div class="balance-icon tint-amber">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 3 6 13.5h5L11 21l7-10.5h-5Z"/></svg>
+                            </div>
+                            <span class="balance-label">Casual Leave</span>
+                        </div>
+                        <div class="balance-number">3 <span class="denom">/ 5 days</span></div>
+                        <div class="balance-progress"><div class="fill amber" style="width:40%;"></div></div>
+                        <div class="balance-used"><span>Used: 2 days</span><span>Remaining: 3</span></div>
+                    </div>
+
+                    <div class="balance-card">
+                        <div class="balance-accent-line rose"></div>
+                        <div class="balance-top">
+                            <div class="balance-icon tint-rose">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5 3 9l9 4 9-4-9-4Z"/><path d="M7 11v4.5c0 1.4 2.2 2.5 5 2.5s5-1.1 5-2.5V11"/></svg>
+                            </div>
+                            <span class="balance-label">Compensatory Off</span>
+                        </div>
+                        <div class="balance-number">2 <span class="denom">/ 3 days</span></div>
+                        <div class="balance-progress"><div class="fill rose" style="width:33%;"></div></div>
+                        <div class="balance-used"><span>Used: 1 day</span><span>Remaining: 2</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- =========================================================
+            REQUEST FORM + QUICK STATS
+            ========================================================= -->
+            <div class="grid">
+                <!-- Request Form -->
+                <section class="leave-request-section" aria-label="Leave request form">
+                    <div class="card">
+                        <div class="card-title-row">
+                            <span class="card-icon-badge tint-indigo">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 9.5h17M8 3v3.5M16 3v3.5" stroke-linecap="round"/></svg>
+                            </span>
+                            <h3 class="card-title">Request Time Off</h3>
+                        </div>
+
+                        <form class="leave-form" id="leaveRequestForm">
+                            <div class="form-group">
+                                <label for="leaveType">Leave Type</label>
+                                <select id="leaveType" required>
+                                    <option value="">Select type</option>
+                                    <option>Annual Leave</option>
+                                    <option>Sick Leave</option>
+                                    <option>Casual Leave</option>
+                                    <option>Compensatory Off</option>
+                                    <option>Work From Home</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="leaveDays">Number of Days</label>
+                                <input type="number" id="leaveDays" min="0.5" step="0.5" placeholder="e.g. 2" required />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="leaveFrom">From Date</label>
+                                <input type="date" id="leaveFrom" required />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="leaveTo">To Date</label>
+                                <input type="date" id="leaveTo" required />
+                            </div>
+
+                            <div class="form-group full-width">
+                                <label for="leaveReason">Reason</label>
+                                <textarea id="leaveReason" rows="3" placeholder="Provide a brief reason for your leave request…" required></textarea>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-a">Submit Request</button>
+                                <button type="reset" class="btn btn-b">Clear</button>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+
+                <!-- Quick Stats -->
+                <section class="leave-quick-stats" aria-label="Quick leave stats">
+                    <div class="card">
+                        <div class="card-title-row">
+                            <span class="card-icon-badge tint-teal">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            </span>
+                            <h3 class="card-title">Leave Summary</h3>
+                        </div>
+
+                        <div class="quick-stat-list">
+                            <div class="quick-stat-item">
+                                <div class="qs-left">
+                                    <div class="qs-icon tint-indigo">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 9.5h17" stroke-linecap="round"/></svg>
+                                    </div>
+                                    <div class="qs-info">
+                                        <h4>Total Available</h4>
+                                        <p>Across all leave types</p>
+                                    </div>
+                                </div>
+                                <span class="qs-value">27 days</span>
+                            </div>
+
+                            <div class="quick-stat-item">
+                                <div class="qs-left">
+                                    <div class="qs-icon tint-amber">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="4"/><path d="M12 3v2.5M12 18.5V21M4.2 4.2l1.8 1.8M18 18l1.8 1.8M3 12h2.5M18.5 12H21M4.2 19.8 6 18M18 6l1.8-1.8" stroke-linecap="round"/></svg>
+                                    </div>
+                                    <div class="qs-info">
+                                        <h4>Pending Requests</h4>
+                                        <p>Awaiting manager approval</p>
+                                    </div>
+                                </div>
+                                <span class="qs-value">2</span>
+                            </div>
+
+                            <div class="quick-stat-item">
+                                <div class="qs-left">
+                                    <div class="qs-icon tint-teal">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12.5 9.5 17 19 6.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                                    </div>
+                                    <div class="qs-info">
+                                        <h4>Approved This Year</h4>
+                                        <p>All approved requests</p>
+                                    </div>
+                                </div>
+                                <span class="qs-value">4</span>
+                            </div>
+
+                            <div class="quick-stat-item">
+                                <div class="qs-left">
+                                    <div class="qs-icon tint-rose">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 6 6 18" stroke-linecap="round"/><path d="M6 6l12 12" stroke-linecap="round"/></svg>
+                                    </div>
+                                    <div class="qs-info">
+                                        <h4>Rejected</h4>
+                                        <p>Requests not approved</p>
+                                    </div>
+                                </div>
+                                <span class="qs-value">0</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- =========================================================
+            LEAVE HISTORY
+            ========================================================= -->
+            <div class="grid">
+                <section class="leave-history-section" aria-label="Leave history">
+                    <div class="card">
+                        <div class="card-header-row">
+                            <div class="card-title-row">
+                                <span class="card-icon-badge tint-indigo">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 10.5v3a1 1 0 0 0 1 1h1.5l2 4.5h2l-1.5-4.5H11l7 3v-11l-7 3H6.5A1 1 0 0 0 4 10.5Z" stroke-linejoin="round"/></svg>
+                                </span>
+                                <h3 class="card-title">Leave History</h3>
+                            </div>
+                            <span style="font-size:12.5px;color:var(--slate-light);">Showing last 6 requests</span>
+                        </div>
+
+                        <div class="leave-history-table-wrap">
+                            <table class="leave-history-table">
+                                <thead>
+                                    <tr>
+                                        <th>Type</th>
+                                        <th>From</th>
+                                        <th>To</th>
+                                        <th>Days</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="leaveHistoryBody">
+                                    <tr>
+                                        <td class="dt-primary">Annual Leave</td>
+                                        <td class="dt-muted">15 Jul 2026</td>
+                                        <td class="dt-muted">17 Jul 2026</td>
+                                        <td>3</td>
+                                        <td><span class="status-badge status-badge--approved">Approved</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="dt-primary">Sick Leave</td>
+                                        <td class="dt-muted">03 Jun 2026</td>
+                                        <td class="dt-muted">03 Jun 2026</td>
+                                        <td>1</td>
+                                        <td><span class="status-badge status-badge--approved">Approved</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="dt-primary">Annual Leave</td>
+                                        <td class="dt-muted">22 May 2026</td>
+                                        <td class="dt-muted">24 May 2026</td>
+                                        <td>3</td>
+                                        <td><span class="status-badge status-badge--approved">Approved</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="dt-primary">Casual Leave</td>
+                                        <td class="dt-muted">15 Apr 2026</td>
+                                        <td class="dt-muted">15 Apr 2026</td>
+                                        <td>1</td>
+                                        <td><span class="status-badge status-badge--approved">Approved</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="dt-primary">Annual Leave</td>
+                                        <td class="dt-muted">03 Mar 2026</td>
+                                        <td class="dt-muted">05 Mar 2026</td>
+                                        <td>3</td>
+                                        <td><span class="status-badge status-badge--pending">Pending</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="dt-primary">Compensatory Off</td>
+                                        <td class="dt-muted">18 Feb 2026</td>
+                                        <td class="dt-muted">18 Feb 2026</td>
+                                        <td>1</td>
+                                        <td><span class="status-badge status-badge--approved">Approved</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- =========================================================
+            UPCOMING HOLIDAYS (compact)
+            ========================================================= -->
+            <div class="grid">
+                <div class="holiday-compact">
+                    <div class="holiday-mini">
+                        <div class="h-date">
+                            <span class="day">15</span>
+                            <span class="mon">Aug</span>
+                        </div>
+                        <div class="h-info">
+                            <h4>Independence Day</h4>
+                            <p>National holiday · Office closed</p>
+                        </div>
+                        <span class="h-countdown">in 14 days</span>
+                    </div>
+
+                    <div class="holiday-mini">
+                        <div class="h-date">
+                            <span class="day">07</span>
+                            <span class="mon">Sep</span>
+                        </div>
+                        <div class="h-info">
+                            <h4>Ganesh Chaturthi</h4>
+                            <p>Regional holiday · Office closed</p>
+                        </div>
+                        <span class="h-countdown">in 37 days</span>
+                    </div>
+
+                    <div class="holiday-mini">
+                        <div class="h-date">
+                            <span class="day">02</span>
+                            <span class="mon">Oct</span>
+                        </div>
+                        <div class="h-info">
+                            <h4>Gandhi Jayanti</h4>
+                            <p>National holiday · Office closed</p>
+                        </div>
+                        <span class="h-countdown">in 62 days</span>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script src="script.js?v=5"></script>
+
+    <script>
+        (function() {
+            'use strict';
+
+            /* ---------- Leave Request Form ---------- */
+            const leaveForm = document.getElementById('leaveRequestForm');
+            const historyBody = document.getElementById('leaveHistoryBody');
+
+            if (leaveForm && historyBody) {
+                leaveForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+
+                    const type = document.getElementById('leaveType').value || 'Leave';
+                    const days = document.getElementById('leaveDays').value || '1';
+                    const fromDate = document.getElementById('leaveFrom').value;
+                    const toDate = document.getElementById('leaveTo').value;
+                    const reason = document.getElementById('leaveReason').value || '';
+
+                    const formatDate = (val) => {
+                        if (!val) return 'Date pending';
+                        const d = new Date(val + 'T00:00:00');
+                        return d.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
+                    };
+
+                    const fromLabel = formatDate(fromDate);
+                    const toLabel = formatDate(toDate);
+
+                    // Add to history table
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td class="dt-primary">${type}</td>
+                        <td class="dt-muted">${fromLabel}</td>
+                        <td class="dt-muted">${toLabel}</td>
+                        <td>${days}</td>
+                        <td><span class="status-badge status-badge--pending">Pending</span></td>
+                    `;
+                    historyBody.prepend(row);
+
+                    // Update pending count in quick stats
+                    const pendingItem = document.querySelector('.quick-stat-item:nth-child(2) .qs-value');
+                    if (pendingItem) {
+                        const current = parseInt(pendingItem.textContent) || 0;
+                        pendingItem.textContent = current + 1;
+                    }
+
+                    // Update sidebar badge
+                    const badge = document.querySelector('.side-link.active .nav-badge');
+                    if (badge) {
+                        const current = parseInt(badge.textContent) || 0;
+                        badge.textContent = current + 1;
+                    }
+
+                    // Show toast
+                    if (window.showToast) {
+                        window.showToast(`✅ ${type} request submitted for ${fromLabel}${toLabel !== fromLabel ? ' – ' + toLabel : ''}.`);
+                    } else {
+                        alert(`${type} request submitted successfully!`);
+                    }
+
+                    // Reset form
+                    leaveForm.reset();
+                });
+            }
+
+            /* ---------- Set default dates ---------- */
+            const fromInput = document.getElementById('leaveFrom');
+            const toInput = document.getElementById('leaveTo');
+            if (fromInput && toInput) {
+                const today = new Date();
+                const tomorrow = new Date(today);
+                tomorrow.setDate(tomorrow.getDate() + 1);
+                const format = (d) => d.toISOString().split('T')[0];
+                fromInput.value = format(tomorrow);
+                const nextWeek = new Date(tomorrow);
+                nextWeek.setDate(nextWeek.getDate() + 2);
+                toInput.value = format(nextWeek);
+            }
+
+            /* ---------- Auto-calculate days ---------- */
+            if (fromInput && toInput) {
+                const daysInput = document.getElementById('leaveDays');
+                const calcDays = () => {
+                    if (!fromInput.value || !toInput.value || !daysInput) return;
+                    const from = new Date(fromInput.value + 'T00:00:00');
+                    const to = new Date(toInput.value + 'T00:00:00');
+                    const diff = Math.round((to - from) / 86400000) + 1;
+                    if (diff > 0 && diff <= 30) {
+                        daysInput.value = diff;
+                    }
+                };
+                fromInput.addEventListener('change', calcDays);
+                toInput.addEventListener('change', calcDays);
+                calcDays();
+            }
+
+            /* ---------- Placeholder for "Clear" button ---------- */
+            const clearBtn = leaveForm?.querySelector('button[type="reset"]');
+            if (clearBtn) {
+                clearBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    if (window.showToast) {
+                        window.showToast('Form cleared.');
+                    }
+                    leaveForm?.reset();
+                    // Reset dates after clear
+                    if (fromInput && toInput) {
+                        const today = new Date();
+                        const tomorrow = new Date(today);
+                        tomorrow.setDate(tomorrow.getDate() + 1);
+                        fromInput.value = tomorrow.toISOString().split('T')[0];
+                        const nextWeek = new Date(tomorrow);
+                        nextWeek.setDate(nextWeek.getDate() + 2);
+                        toInput.value = nextWeek.toISOString().split('T')[0];
+                    }
+                });
+            }
+
+        })();
+    </script>
+</body>
+</html>
